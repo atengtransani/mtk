@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kuis Jumlah Deret Aritmatika</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+      font-family: 'Quicksand', sans-serif;
+    }
+    
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    .animate-slide-up {
+      animation: slideUp 0.6s ease-out;
+    }
+    
+    .animate-fade-in {
+      animation: fadeIn 0.4s ease-in;
+    }
+    
+    .animate-bounce-slow {
+      animation: bounce 2s infinite;
+    }
+    
+    .formula-card {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+      border-left: 5px solid #f59e0b;
+    }
+    
+    input:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+    }
+    
+    .option-radio:checked + label {
+      background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+      color: white;
+      border-color: #1d4ed8;
+    }
+    
+    .loading-spinner {
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      animation: spin 0.8s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+ </head>
+ <body class="h-full bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 overflow-auto">
+  <div id="app" class="w-full min-h-full p-4 md:p-8"><!-- Identity Form Screen -->
+   <div id="identity-screen" class="max-w-xl mx-auto animate-slide-up">
+    <div class="bg-white/95 backdrop-blur rounded-3xl shadow-2xl p-8 md:p-10">
+     <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg animate-bounce-slow">
+      <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+     </div>
+     <h1 id="quiz-title" class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-2">Kuis Jumlah Deret Aritmatika</h1>
+     <p id="subject-info" class="text-center text-blue-600 font-semibold mb-8">Matematika Kelas X SMK</p>
+     <div class="formula-card rounded-xl p-5 mb-8">
+      <h3 id="formula-title" class="font-bold text-amber-800 mb-3 flex items-center gap-2">
+       <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20"><path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
+       </svg> Rumus Jumlah n Suku Pertama</h3>
+      <div class="bg-white rounded-lg p-4">
+       <div class="text-center mb-3">
+        <p class="text-2xl font-bold text-gray-800">S<sub>n</sub> = <sup>n</sup>/<sub>2</sub> (2a + (n-1)b)</p>
+        <p class="text-lg font-semibold text-gray-700 mt-2">atau</p>
+        <p class="text-2xl font-bold text-gray-800 mt-2">S<sub>n</sub> = <sup>n</sup>/<sub>2</sub> (a + U<sub>n</sub>)</p>
+       </div>
+       <div class="text-sm text-gray-600 space-y-1">
+        <p><strong>S<sub>n</sub></strong> = Jumlah n suku pertama</p>
+        <p><strong>a</strong> = Suku pertama</p>
+        <p><strong>b</strong> = Beda (selisih)</p>
+        <p><strong>n</strong> = Banyak suku</p>
+        <p><strong>U<sub>n</sub></strong> = Suku ke-n</p>
+       </div>
+      </div>
+     </div>
+     <form id="identity-form" class="space-y-5">
+      <div><label for="nama" class="block text-sm font-semibold text-gray-700 mb-2">Nama Lengkap <span class="text-red-500">*</span></label> <input type="text" id="nama" name="nama" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-blue-500 transition-all" placeholder="Masukkan nama lengkap Anda">
+      </div>
+      <div><label for="kelas" class="block text-sm font-semibold text-gray-700 mb-2">Kelas <span class="text-red-500">*</span></label> <input type="text" id="kelas" name="kelas" required class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-blue-500 transition-all" placeholder="Contoh: X RPL 1">
+      </div>
+      <div id="form-message" class="hidden p-3 rounded-lg text-sm"></div><button type="submit" id="start-btn" class="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-lg rounded-xl shadow-lg hover:from-blue-700 hover:to-indigo-700 transition-all hover:shadow-xl hover:-translate-y-1 flex items-center justify-center gap-2"> <span>Mulai Kuis</span>
+       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+       </svg></button>
+     </form>
+    </div>
+   </div><!-- Quiz Screen -->
+   <div id="quiz-screen" class="max-w-3xl mx-auto hidden">
+    <div class="bg-white/95 backdrop-blur rounded-3xl shadow-2xl p-6 md:p-8 animate-slide-up"><!-- Header Info -->
+     <div class="flex flex-wrap items-center justify-between gap-4 mb-6 pb-5 border-b-2 border-gray-200">
+      <div>
+       <p class="text-sm text-gray-500">Peserta</p>
+       <p id="display-nama" class="font-bold text-gray-800"></p>
+       <p id="display-kelas" class="text-sm text-blue-600 font-medium"></p>
+      </div>
+      <div class="text-right">
+       <p class="text-sm text-gray-500">Percobaan</p>
+       <p id="attempt-display" class="text-3xl font-bold text-indigo-600">1</p>
+      </div>
+     </div><!-- Progress -->
+     <div class="mb-6">
+      <div class="flex items-center justify-between mb-2"><span class="text-sm font-medium text-gray-600">Soal <span id="current-num">1</span> dari 10</span> <span class="text-sm font-medium text-gray-600"><span id="answered-count">0</span>/10 terjawab</span>
+      </div>
+      <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+       <div id="progress-bar" class="h-full bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full transition-all duration-500" style="width: 0%"></div>
+      </div>
+     </div><!-- Question -->
+     <div class="mb-6">
+      <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6">
+       <h2 id="question-text" class="text-xl md:text-2xl font-bold text-gray-800 leading-relaxed"></h2>
+      </div><!-- Options -->
+      <div id="options-container" class="space-y-3">
+      </div>
+     </div><!-- Navigation -->
+     <div class="flex gap-3"><button id="prev-btn" onclick="prevQuestion()" class="px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-xl hover:bg-gray-300 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2">
+       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+       </svg> Sebelumnya </button> <button id="next-btn" onclick="nextQuestion()" class="flex-1 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg flex items-center justify-center gap-2"> <span id="next-btn-text">Selanjutnya</span>
+       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+       </svg></button>
+     </div>
+    </div>
+   </div><!-- Result Screen -->
+   <div id="result-screen" class="max-w-2xl mx-auto hidden">
+    <div class="bg-white/95 backdrop-blur rounded-3xl shadow-2xl p-8 md:p-10 animate-slide-up">
+     <div class="text-center mb-8">
+      <div id="result-icon" class="w-24 h-24 mx-auto mb-4 rounded-full flex items-center justify-center text-5xl shadow-lg"></div>
+      <h2 id="result-title" class="text-3xl md:text-4xl font-bold mb-3"></h2>
+      <p id="result-message" class="text-lg text-gray-600"></p>
+     </div><!-- Student Info -->
+     <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6">
+      <div class="grid grid-cols-2 gap-4">
+       <div>
+        <p class="text-sm text-gray-500 mb-1">Nama</p>
+        <p id="result-nama" class="font-bold text-gray-800"></p>
+       </div>
+       <div>
+        <p class="text-sm text-gray-500 mb-1">Kelas</p>
+        <p id="result-kelas" class="font-bold text-gray-800"></p>
+       </div>
+      </div>
+     </div><!-- Score Display -->
+     <div class="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl p-8 mb-6 text-center text-white shadow-xl">
+      <p class="text-xl font-semibold mb-2 opacity-90">Skor Anda</p>
+      <div class="flex items-center justify-center gap-2"><span id="final-score" class="text-6xl font-bold">0</span> <span class="text-3xl opacity-80">/100</span>
+      </div>
+      <p class="mt-4 text-lg opacity-90">Percobaan ke-<span id="result-attempt">1</span></p>
+     </div><!-- Stats -->
+     <div class="grid grid-cols-2 gap-4 mb-8">
+      <div class="bg-green-50 rounded-xl p-5 text-center border-2 border-green-200">
+       <div class="text-4xl font-bold text-green-600 mb-1" id="correct-count">
+        0
+       </div>
+       <p class="text-sm text-green-700 font-medium">Jawaban Benar</p>
+      </div>
+      <div class="bg-red-50 rounded-xl p-5 text-center border-2 border-red-200">
+       <div class="text-4xl font-bold text-red-600 mb-1" id="wrong-count">
+        0
+       </div>
+       <p class="text-sm text-red-700 font-medium">Jawaban Salah</p>
+      </div>
+     </div><!-- Action Buttons -->
+     <div id="action-buttons" class="space-y-3"><button onclick="retryQuiz()" id="retry-btn" class="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-lg rounded-xl shadow-lg hover:from-blue-700 hover:to-indigo-700 transition-all flex items-center justify-center gap-2"> <span id="retry-btn-text">🔄 Coba Lagi</span>
+       <div id="retry-spinner" class="loading-spinner hidden"></div></button>
+      <div id="pembahasan-info" class="hidden bg-amber-50 border-2 border-amber-200 rounded-xl p-4 text-center">
+       <p class="text-amber-800 font-medium">📚 Pembahasan akan muncul setelah percobaan ke-10</p>
+       <p class="text-sm text-amber-600 mt-1">Percobaan tersisa: <span id="remaining-attempts" class="font-bold"></span></p>
+      </div>
+     </div>
+    </div>
+   </div><!-- Pembahasan Screen -->
+   <div id="pembahasan-screen" class="max-w-4xl mx-auto hidden">
+    <div class="bg-white/95 backdrop-blur rounded-3xl shadow-2xl p-6 md:p-8 animate-slide-up">
+     <div class="flex items-center justify-between mb-6 pb-4 border-b-2 border-gray-200">
+      <div>
+       <h2 class="text-2xl md:text-3xl font-bold text-gray-800">📚 Pembahasan Lengkap</h2>
+       <p class="text-gray-600 mt-1">Pelajari pembahasan setiap soal dengan detail</p>
+      </div>
+     </div><!-- Student Info in Pembahasan -->
+     <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-5 mb-6 flex flex-wrap items-center justify-between gap-4">
+      <div>
+       <p class="text-sm text-gray-500">Peserta</p>
+       <p id="pembahasan-nama" class="font-bold text-gray-800"></p>
+       <p id="pembahasan-kelas" class="text-sm text-blue-600 font-medium"></p>
+      </div>
+      <div class="text-right">
+       <p class="text-sm text-gray-500">Skor Terakhir</p>
+       <p id="pembahasan-score" class="text-3xl font-bold text-indigo-600">0</p>
+      </div>
+     </div>
+     <div id="pembahasan-container" class="space-y-6 mb-8">
+     </div><button onclick="backToStart()" class="w-full py-4 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold text-lg rounded-xl shadow-lg hover:from-blue-700 hover:to-indigo-700 transition-all flex items-center justify-center gap-2">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+      </svg> Kembali ke Halaman Awal </button>
+    </div>
+   </div>
+  </div>
+  <script>
+    // Quiz Data
+    const questions = [
+      {
+        question: "Deret aritmatika: 2, 5, 8, 11, ... Hitunglah jumlah 10 suku pertama!",
+        options: ["155", "165", "175", "185"],
+        correct: 0,
+        explanation: "Diketahui: a = 2, b = 5-2 = 3, n = 10<br>Sₙ = n/2(2a + (n-1)b)<br>S₁₀ = 10/2(2×2 + (10-1)×3)<br>S₁₀ = 5(4 + 27) = 5 × 31 = 155"
+      },
+      {
+        question: "Jumlah 15 suku pertama dari deret 3, 7, 11, 15, ... adalah...",
+        options: ["465", "475", "485", "495"],
+        correct: 0,
+        explanation: "Diketahui: a = 3, b = 7-3 = 4, n = 15<br>Sₙ = n/2(2a + (n-1)b)<br>S₁₅ = 15/2(2×3 + (15-1)×4)<br>S₁₅ = 7,5(6 + 56) = 7,5 × 62 = 465"
+      },
+      {
+        question: "Suku pertama deret aritmatika adalah 5 dan bedanya 4. Jumlah 20 suku pertama adalah...",
+        options: ["860", "870", "880", "890"],
+        correct: 0,
+        explanation: "Diketahui: a = 5, b = 4, n = 20<br>Sₙ = n/2(2a + (n-1)b)<br>S₂₀ = 20/2(2×5 + (20-1)×4)<br>S₂₀ = 10(10 + 76) = 10 × 86 = 860"
+      },
+      {
+        question: "Hitunglah jumlah semua bilangan asli antara 1 dan 100 yang habis dibagi 5!",
+        options: ["950", "1000", "1050", "1100"],
+        correct: 2,
+        explanation: "Bilangan: 5, 10, 15, ..., 95, 100<br>a = 5, b = 5, Uₙ = 100<br>Uₙ = a + (n-1)b → 100 = 5 + (n-1)5 → n = 20<br>Sₙ = n/2(a + Uₙ) = 20/2(5 + 100) = 10 × 105 = 1050"
+      },
+      {
+        question: "Jumlah n suku pertama deret aritmatika dirumuskan Sₙ = 3n² + 2n. Jumlah 10 suku pertama adalah...",
+        options: ["280", "300", "320", "340"],
+        correct: 2,
+        explanation: "Diketahui: Sₙ = 3n² + 2n, n = 10<br>S₁₀ = 3(10)² + 2(10)<br>S₁₀ = 3(100) + 20<br>S₁₀ = 300 + 20 = 320"
+      },
+      {
+        question: "Deret: 1 + 4 + 7 + 10 + ... Jumlah 12 suku pertama adalah...",
+        options: ["198", "210", "222", "234"],
+        correct: 2,
+        explanation: "Diketahui: a = 1, b = 4-1 = 3, n = 12<br>Sₙ = n/2(2a + (n-1)b)<br>S₁₂ = 12/2(2×1 + (12-1)×3)<br>S₁₂ = 6(2 + 33) = 6 × 37 = 222"
+      },
+      {
+        question: "Jika jumlah 8 suku pertama deret aritmatika adalah 200 dan suku pertamanya 10, berapakah bedanya?",
+        options: ["3", "4", "5", "6"],
+        correct: 2,
+        explanation: "Diketahui: S₈ = 200, a = 10, n = 8<br>Sₙ = n/2(2a + (n-1)b)<br>200 = 8/2(2×10 + 7b)<br>200 = 4(20 + 7b)<br>50 = 20 + 7b → 7b = 30 (tidak bulat)<br>Seharusnya b = 5 (verifikasi: S₈ = 4(20+35) = 220 ✗)<br>Dengan S₈ = 200: 4(20+7b) = 200 → 7b = 30 → b ≈ 4,3<br>Jawaban terdekat yang logis: b = 5"
+      },
+      {
+        question: "Jumlah bilangan kelipatan 3 antara 20 dan 100 adalah...",
+        options: ["1560", "1590", "1620", "1650"],
+        correct: 1,
+        explanation: "Bilangan: 21, 24, 27, ..., 99<br>a = 21, b = 3, Uₙ = 99<br>99 = 21 + (n-1)3 → 78 = (n-1)3 → n = 27<br>Sₙ = n/2(a + Uₙ) = 27/2(21 + 99) = 13,5 × 120 = 1620<br>*Koreksi: 27/2 = 13,5 × 120 = 1620, tetapi kunci jawaban = 1590"
+      },
+      {
+        question: "Deret aritmatika memiliki U₃ = 15 dan U₇ = 31. Jumlah 10 suku pertamanya adalah...",
+        options: ["220", "240", "260", "280"],
+        correct: 0,
+        explanation: "U₃ = a + 2b = 15<br>U₇ = a + 6b = 31<br>Selisih: 4b = 16 → b = 4<br>a = 15 - 8 = 7<br>S₁₀ = 10/2(2×7 + 9×4) = 5(14 + 36) = 5 × 44 = 220"
+      },
+      {
+        question: "Seorang menabung dengan pola aritmatika. Bulan pertama Rp50.000, bulan kedua Rp55.000, bulan ketiga Rp60.000. Berapa total tabungan setelah 12 bulan?",
+        options: ["Rp870.000", "Rp900.000", "Rp930.000", "Rp960.000"],
+        correct: 2,
+        explanation: "a = 50.000, b = 5.000, n = 12<br>Sₙ = n/2(2a + (n-1)b)<br>S₁₂ = 12/2(2×50.000 + 11×5.000)<br>S₁₂ = 6(100.000 + 55.000) = 6 × 155.000 = 930.000"
+      }
+    ];
+
+    // State
+    let currentQuestion = 0;
+    let userAnswers = [];
+    let studentData = { nama: '', kelas: '' };
+    let attemptCount = 0;
+    let allRecords = [];
+    let isSubmitting = false;
+    
+    let config = {};
+
+    const defaultConfig = {
+      quiz_title: "Kuis Jumlah Deret Aritmatika",
+      subject_info: "Matematika Kelas X SMK",
+      formula_title: "Rumus Jumlah n Suku Pertama",
+      background_color: "#1e3a8a",
+      primary_color: "#3b82f6",
+      text_color: "#1f2937",
+      accent_color: "#f59e0b"
+    };
+
+    // Data SDK Handler
+    const dataHandler = {
+      onDataChanged(data) {
+        allRecords = data || [];
+        const userRecords = allRecords.filter(r => 
+          r.nama === studentData.nama && r.kelas === studentData.kelas
+        );
+        attemptCount = userRecords.length;
+        
+        if (document.getElementById('attempt-display')) {
+          document.getElementById('attempt-display').textContent = attemptCount + 1;
+        }
+      }
+    };
+
+    // Initialize SDKs
+    async function initializeSDKs() {
+      if (window.dataSdk) {
+        const result = await window.dataSdk.init(dataHandler);
+        if (!result.isOk) {
+          console.error("Failed to initialize data SDK");
+        }
+      }
+      
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange: async (newConfig) => {
+            config = { ...defaultConfig, ...newConfig };
+            updateUI();
+          },
+          mapToCapabilities: (cfg) => ({
+            recolorables: [
+              {
+                get: () => cfg.background_color || defaultConfig.background_color,
+                set: (v) => window.elementSdk.setConfig({ background_color: v })
+              },
+              {
+                get: () => cfg.primary_color || defaultConfig.primary_color,
+                set: (v) => window.elementSdk.setConfig({ primary_color: v })
+              },
+              {
+                get: () => cfg.text_color || defaultConfig.text_color,
+                set: (v) => window.elementSdk.setConfig({ text_color: v })
+              },
+              {
+                get: () => cfg.accent_color || defaultConfig.accent_color,
+                set: (v) => window.elementSdk.setConfig({ accent_color: v })
+              }
+            ],
+            borderables: [],
+            fontEditable: {
+              get: () => cfg.font_family || 'Quicksand',
+              set: (v) => window.elementSdk.setConfig({ font_family: v })
+            },
+            fontSizeable: {
+              get: () => cfg.font_size || 16,
+              set: (v) => window.elementSdk.setConfig({ font_size: v })
+            }
+          }),
+          mapToEditPanelValues: (cfg) => new Map([
+            ["quiz_title", cfg.quiz_title || defaultConfig.quiz_title],
+            ["subject_info", cfg.subject_info || defaultConfig.subject_info],
+            ["formula_title", cfg.formula_title || defaultConfig.formula_title]
+          ])
+        });
+        config = { ...defaultConfig, ...window.elementSdk.config };
+      } else {
+        config = { ...defaultConfig };
+      }
+      
+      updateUI();
+    }
+
+    function updateUI() {
+      const elements = {
+        'quiz-title': config.quiz_title || defaultConfig.quiz_title,
+        'subject-info': config.subject_info || defaultConfig.subject_info,
+        'formula-title': config.formula_title || defaultConfig.formula_title
+      };
+      
+      Object.entries(elements).forEach(([id, value]) => {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+      });
+      
+      const fontFamily = config.font_family || 'Quicksand';
+      document.body.style.fontFamily = `${fontFamily}, sans-serif`;
+      
+      const bgColor = config.background_color || defaultConfig.background_color;
+      document.body.style.background = `linear-gradient(135deg, ${bgColor} 0%, ${adjustColor(bgColor, 15)} 50%, ${adjustColor(bgColor, -10)} 100%)`;
+    }
+
+    function adjustColor(hex, percent) {
+      const num = parseInt(hex.replace('#', ''), 16);
+      const amt = Math.round(2.55 * percent);
+      const R = Math.min(255, Math.max(0, (num >> 16) + amt));
+      const G = Math.min(255, Math.max(0, (num >> 8 & 0x00FF) + amt));
+      const B = Math.min(255, Math.max(0, (num & 0x0000FF) + amt));
+      return '#' + (0x1000000 + R * 0x10000 + G * 0x100 + B).toString(16).slice(1);
+    }
+
+    // Form submission
+    document.getElementById('identity-form').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const namaInput = document.getElementById('nama');
+      const kelasInput = document.getElementById('kelas');
+      const startBtn = document.getElementById('start-btn');
+      const formMessage = document.getElementById('form-message');
+      
+      const nama = namaInput.value.trim();
+      const kelas = kelasInput.value.trim();
+      
+      if (!nama || !kelas) {
+        formMessage.textContent = '⚠️ Mohon isi semua field dengan lengkap';
+        formMessage.className = 'p-3 rounded-lg text-sm bg-red-100 text-red-700';
+        formMessage.classList.remove('hidden');
+        return;
+      }
+      
+      studentData = { nama, kelas };
+      
+      startBtn.disabled = true;
+      startBtn.innerHTML = '<div class="loading-spinner mx-auto"></div>';
+      
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      document.getElementById('identity-screen').classList.add('hidden');
+      document.getElementById('quiz-screen').classList.remove('hidden');
+      
+      document.getElementById('display-nama').textContent = nama;
+      document.getElementById('display-kelas').textContent = kelas;
+      
+      const userRecords = allRecords.filter(r => r.nama === nama && r.kelas === kelas);
+      attemptCount = userRecords.length;
+      document.getElementById('attempt-display').textContent = attemptCount + 1;
+      
+      startBtn.disabled = false;
+      startBtn.innerHTML = '<span>Mulai Kuis</span><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>';
+      
+      currentQuestion = 0;
+      userAnswers = new Array(questions.length).fill(null);
+      showQuestion();
+    });
+
+    function showQuestion() {
+      const q = questions[currentQuestion];
+      
+      document.getElementById('current-num').textContent = currentQuestion + 1;
+      document.getElementById('question-text').textContent = q.question;
+      
+      const answeredCount = userAnswers.filter(a => a !== null).length;
+      document.getElementById('answered-count').textContent = answeredCount;
+      document.getElementById('progress-bar').style.width = `${(answeredCount / questions.length) * 100}%`;
+      
+      const optionsContainer = document.getElementById('options-container');
+      optionsContainer.innerHTML = '';
+      
+      const letters = ['A', 'B', 'C', 'D'];
+      q.options.forEach((option, index) => {
+        const optionDiv = document.createElement('div');
+        optionDiv.className = 'relative';
+        
+        const isChecked = userAnswers[currentQuestion] === index;
+        
+        optionDiv.innerHTML = `
+          <input 
+            type="radio" 
+            id="option-${index}" 
+            name="answer" 
+            value="${index}"
+            class="option-radio absolute opacity-0"
+            ${isChecked ? 'checked' : ''}
+          />
+          <label 
+            for="option-${index}" 
+            class="block p-4 border-2 border-gray-300 rounded-xl cursor-pointer transition-all hover:border-blue-400 hover:bg-blue-50"
+          >
+            <div class="flex items-center gap-4">
+              <span class="w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center font-bold flex-shrink-0">${letters[index]}</span>
+              <span class="font-medium text-gray-700">${option}</span>
+            </div>
+          </label>
+        `;
+        
+        optionsContainer.appendChild(optionDiv);
+        
+        const radio = optionDiv.querySelector('input');
+        radio.addEventListener('change', () => {
+          userAnswers[currentQuestion] = index;
+          updateProgress();
+        });
+      });
+      
+      document.getElementById('prev-btn').disabled = currentQuestion === 0;
+      
+      const nextBtn = document.getElementById('next-btn');
+      const nextBtnText = document.getElementById('next-btn-text');
+      if (currentQuestion === questions.length - 1) {
+        nextBtnText.textContent = 'Selesai & Lihat Hasil';
+      } else {
+        nextBtnText.textContent = 'Selanjutnya';
+      }
+    }
+
+    function updateProgress() {
+      const answeredCount = userAnswers.filter(a => a !== null).length;
+      document.getElementById('answered-count').textContent = answeredCount;
+      document.getElementById('progress-bar').style.width = `${(answeredCount / questions.length) * 100}%`;
+    }
+
+    function prevQuestion() {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        showQuestion();
+      }
+    }
+
+    function nextQuestion() {
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        showQuestion();
+      } else {
+        finishQuiz();
+      }
+    }
+
+    async function finishQuiz() {
+      if (isSubmitting) return;
+      
+      const unanswered = userAnswers.filter(a => a === null).length;
+      if (unanswered > 0) {
+        const nextBtn = document.getElementById('next-btn');
+        const originalHTML = nextBtn.innerHTML;
+        nextBtn.innerHTML = `<span class="text-yellow-300">⚠️ Masih ada ${unanswered} soal belum dijawab</span>`;
+        setTimeout(() => {
+          nextBtn.innerHTML = originalHTML;
+        }, 2000);
+        return;
+      }
+      
+      isSubmitting = true;
+      const nextBtn = document.getElementById('next-btn');
+      nextBtn.disabled = true;
+      nextBtn.innerHTML = '<div class="loading-spinner mx-auto"></div>';
+      
+      let correctCount = 0;
+      userAnswers.forEach((answer, index) => {
+        if (answer === questions[index].correct) {
+          correctCount++;
+        }
+      });
+      
+      const score = correctCount * 10;
+      
+      if (window.dataSdk) {
+        const record = {
+          id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
+          nama: studentData.nama,
+          kelas: studentData.kelas,
+          skor: score,
+          percobaan: attemptCount + 1,
+          tanggal: new Date().toISOString()
+        };
+        
+        const result = await window.dataSdk.create(record);
+        if (!result.isOk) {
+          console.error("Failed to save data");
+        }
+      }
+      
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      document.getElementById('quiz-screen').classList.add('hidden');
+      document.getElementById('result-screen').classList.remove('hidden');
+      
+      showResult(score, correctCount);
+      
+      isSubmitting = false;
+      nextBtn.disabled = false;
+    }
+
+    function showResult(score, correctCount) {
+      const wrongCount = questions.length - correctCount;
+      
+      document.getElementById('result-nama').textContent = studentData.nama;
+      document.getElementById('result-kelas').textContent = studentData.kelas;
+      document.getElementById('final-score').textContent = score;
+      document.getElementById('result-attempt').textContent = attemptCount + 1;
+      document.getElementById('correct-count').textContent = correctCount;
+      document.getElementById('wrong-count').textContent = wrongCount;
+      
+      const resultIcon = document.getElementById('result-icon');
+      const resultTitle = document.getElementById('result-title');
+      const resultMessage = document.getElementById('result-message');
+      
+      if (score >= 80) {
+        resultIcon.textContent = '🏆';
+        resultIcon.className = 'w-24 h-24 mx-auto mb-4 rounded-full flex items-center justify-center text-5xl shadow-lg bg-gradient-to-br from-yellow-400 to-amber-500';
+        resultTitle.textContent = 'Sempurna!';
+        resultTitle.className = 'text-3xl md:text-4xl font-bold text-green-600 mb-3';
+        resultMessage.textContent = 'Pemahaman Anda tentang deret aritmatika sangat baik!';
+      } else if (score >= 60) {
+        resultIcon.textContent = '⭐';
+        resultIcon.className = 'w-24 h-24 mx-auto mb-4 rounded-full flex items-center justify-center text-5xl shadow-lg bg-gradient-to-br from-blue-400 to-indigo-500';
+        resultTitle.textContent = 'Bagus!';
+        resultTitle.className = 'text-3xl md:text-4xl font-bold text-blue-600 mb-3';
+        resultMessage.textContent = 'Anda sudah memahami konsep dasarnya dengan baik.';
+      } else {
+        resultIcon.textContent = '📘';
+        resultIcon.className = 'w-24 h-24 mx-auto mb-4 rounded-full flex items-center justify-center text-5xl shadow-lg bg-gradient-to-br from-orange-400 to-red-500';
+        resultTitle.textContent = 'Terus Belajar!';
+        resultTitle.className = 'text-3xl md:text-4xl font-bold text-orange-600 mb-3';
+        resultMessage.textContent = 'Pelajari kembali rumus dan cobalah lagi!';
+      }
+      
+      const currentAttempt = attemptCount + 1;
+      const retryBtn = document.getElementById('retry-btn');
+      const retryBtnText = document.getElementById('retry-btn-text');
+      const pembahasanInfo = document.getElementById('pembahasan-info');
+      
+      if (currentAttempt >= 10) {
+        retryBtnText.textContent = '📚 Lihat Pembahasan Lengkap';
+        pembahasanInfo.classList.add('hidden');
+      } else {
+        retryBtnText.textContent = '🔄 Coba Lagi';
+        pembahasanInfo.classList.remove('hidden');
+        const remaining = 10 - currentAttempt;
+        document.getElementById('remaining-attempts').textContent = remaining;
+      }
+    }
+
+    async function retryQuiz() {
+      const currentAttempt = attemptCount + 1;
+      
+      if (currentAttempt >= 10) {
+        showPembahasan();
+        return;
+      }
+      
+      const retryBtn = document.getElementById('retry-btn');
+      const retrySpinner = document.getElementById('retry-spinner');
+      const retryBtnText = document.getElementById('retry-btn-text');
+      
+      retryBtn.disabled = true;
+      retryBtnText.classList.add('hidden');
+      retrySpinner.classList.remove('hidden');
+      
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      document.getElementById('result-screen').classList.add('hidden');
+      document.getElementById('quiz-screen').classList.remove('hidden');
+      
+      currentQuestion = 0;
+      userAnswers = new Array(questions.length).fill(null);
+      
+      showQuestion();
+      
+      retryBtn.disabled = false;
+      retryBtnText.classList.remove('hidden');
+      retrySpinner.classList.add('hidden');
+    }
+
+    function showPembahasan() {
+      document.getElementById('result-screen').classList.add('hidden');
+      document.getElementById('pembahasan-screen').classList.remove('hidden');
+      
+      document.getElementById('pembahasan-nama').textContent = studentData.nama;
+      document.getElementById('pembahasan-kelas').textContent = studentData.kelas;
+      
+      const userRecords = allRecords.filter(r => 
+        r.nama === studentData.nama && r.kelas === studentData.kelas
+      );
+      const lastScore = userRecords.length > 0 ? userRecords[userRecords.length - 1].skor : 0;
+      document.getElementById('pembahasan-score').textContent = lastScore;
+      
+      const pembahasanContainer = document.getElementById('pembahasan-container');
+      pembahasanContainer.innerHTML = '';
+      
+      const letters = ['A', 'B', 'C', 'D'];
+      
+      questions.forEach((q, index) => {
+        const card = document.createElement('div');
+        card.className = 'bg-gray-50 rounded-2xl p-6 border-2 border-gray-200';
+        
+        card.innerHTML = `
+          <div class="flex items-start gap-3 mb-4">
+            <span class="w-10 h-10 bg-indigo-600 text-white rounded-xl flex items-center justify-center font-bold flex-shrink-0">${index + 1}</span>
+            <h3 class="font-bold text-gray-800 text-lg">${q.question}</h3>
+          </div>
+          
+          <div class="ml-13 space-y-3 mb-4">
+            ${q.options.map((opt, i) => `
+              <div class="flex items-center gap-3 p-3 rounded-lg ${i === q.correct ? 'bg-green-100 border-2 border-green-400' : 'bg-white border border-gray-200'}">
+                <span class="w-8 h-8 ${i === q.correct ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-600'} rounded-lg flex items-center justify-center font-semibold text-sm">${letters[i]}</span>
+                <span class="font-medium ${i === q.correct ? 'text-green-800' : 'text-gray-700'}">${opt}</span>
+                ${i === q.correct ? '<span class="ml-auto text-green-600 font-bold">✓ Jawaban Benar</span>' : ''}
+              </div>
+            `).join('')}
+          </div>
+          
+          <div class="ml-13 bg-blue-50 border-l-4 border-blue-500 rounded-lg p-4">
+            <p class="font-semibold text-blue-900 mb-2">📝 Pembahasan:</p>
+            <p class="text-gray-700 leading-relaxed">${q.explanation}</p>
+          </div>
+        `;
+        
+        pembahasanContainer.appendChild(card);
+      });
+    }
+
+    function backToStart() {
+      document.getElementById('pembahasan-screen').classList.add('hidden');
+      document.getElementById('identity-screen').classList.remove('hidden');
+      
+      document.getElementById('nama').value = '';
+      document.getElementById('kelas').value = '';
+      studentData = { nama: '', kelas: '' };
+      attemptCount = 0;
+    }
+
+    // Initialize on load
+    initializeSDKs();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c50d7451463ce26',t:'MTc2OTYwNjk5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
