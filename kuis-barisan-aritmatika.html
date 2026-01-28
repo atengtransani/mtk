@@ -26,6 +26,13 @@
       box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
     }
     
+    .option-selected {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
+      border-color: #f5576c !important;
+      color: white !important;
+      transform: scale(1.02);
+    }
+    
     .correct-answer {
       background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%) !important;
       color: white !important;
@@ -80,7 +87,16 @@
      </div>
      <h1 id="main-title" class="text-3xl md:text-4xl font-extrabold text-white mb-3">Kuis Barisan Aritmatika</h1>
      <p id="subject-info" class="text-purple-200 text-lg">Matematika Kelas X SMK</p>
-    </div>
+    </div><!-- Form Identitas -->
+    <form id="identity-form" class="bg-white/10 backdrop-blur-md rounded-3xl p-6 md:p-8 mb-6">
+     <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">👤 Data Siswa</h2>
+     <div class="space-y-4">
+      <div><label for="student-name" class="block text-purple-100 font-medium mb-2">Nama Lengkap</label> <input type="text" id="student-name" required placeholder="Masukkan nama lengkap" class="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/20 text-white placeholder-purple-300 focus:outline-none focus:border-yellow-400 transition-colors">
+      </div>
+      <div><label for="student-class" class="block text-purple-100 font-medium mb-2">Kelas</label> <input type="text" id="student-class" required placeholder="Contoh: X TKJ 1" class="w-full px-4 py-3 rounded-xl bg-white/10 border-2 border-white/20 text-white placeholder-purple-300 focus:outline-none focus:border-yellow-400 transition-colors">
+      </div>
+     </div>
+    </form>
     <div class="bg-white/10 backdrop-blur-md rounded-3xl p-6 md:p-8 mb-6">
      <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">📚 Materi yang Diujikan</h2>
      <ul class="space-y-3 text-purple-100">
@@ -99,9 +115,19 @@
       <div class="flex items-center gap-2"><span class="text-2xl">❓</span> <span>Jumlah Soal</span>
       </div><span class="text-2xl font-bold text-yellow-400">10</span>
      </div>
-    </div><button id="start-btn" class="w-full py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-purple-900 font-bold text-xl rounded-2xl hover:from-yellow-300 hover:to-orange-400 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg"> 🚀 Mulai Kuis </button>
+    </div><button type="submit" form="identity-form" id="start-btn" class="w-full py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-purple-900 font-bold text-xl rounded-2xl hover:from-yellow-300 hover:to-orange-400 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg"> ��� Mulai Kuis </button>
    </div><!-- Quiz Screen -->
-   <div id="quiz-screen" class="max-w-2xl mx-auto hidden"><!-- Progress -->
+   <div id="quiz-screen" class="max-w-2xl mx-auto hidden"><!-- Student Info Display -->
+    <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 mb-4 flex items-center justify-between">
+     <div class="flex items-center gap-3">
+      <div class="bg-yellow-400 rounded-full w-10 h-10 flex items-center justify-center text-purple-900 font-bold text-lg"><span id="student-initial">?</span>
+      </div>
+      <div>
+       <p class="text-white font-semibold" id="display-name">-</p>
+       <p class="text-purple-200 text-sm" id="display-class">-</p>
+      </div>
+     </div>
+    </div><!-- Progress -->
     <div class="mb-6">
      <div class="flex justify-between items-center text-white mb-2"><span class="font-semibold">Soal <span id="current-q">1</span> dari 10</span> <span class="font-semibold">Skor: <span id="score">0</span></span>
      </div>
@@ -117,10 +143,15 @@
     <div id="options-container" class="space-y-3 mb-6"></div><!-- Feedback -->
     <div id="feedback" class="hidden bg-white/10 backdrop-blur-md rounded-2xl p-4 mb-6">
      <p id="feedback-text" class="text-white font-medium"></p>
-    </div><!-- Next Button --> <button id="next-btn" class="hidden w-full py-4 bg-gradient-to-r from-emerald-400 to-cyan-500 text-white font-bold text-lg rounded-2xl hover:from-emerald-300 hover:to-cyan-400 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg"> Soal Berikutnya → </button>
+    </div><!-- Next Button --> <button id="next-btn" class="hidden w-full py-4 bg-gradient-to-r from-emerald-400 to-cyan-500 text-white font-bold text-lg rounded-2xl hover:from-emerald-300 hover:to-cyan-400 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg"> Soal Berikutnya ��� </button>
    </div><!-- Result Screen -->
    <div id="result-screen" class="max-w-2xl mx-auto hidden fade-in">
     <div class="bg-white/10 backdrop-blur-md rounded-3xl p-8 text-center">
+     <div class="bg-white/10 rounded-2xl p-4 mb-6">
+      <p class="text-purple-200 text-sm mb-1">Nama Siswa</p>
+      <p class="text-white font-bold text-lg" id="result-name">-</p>
+      <p class="text-purple-200 text-sm" id="result-class">-</p>
+     </div>
      <div id="result-emoji" class="text-8xl mb-4"></div>
      <h2 id="result-title" class="text-3xl font-extrabold text-white mb-2"></h2>
      <p id="result-message" class="text-purple-200 text-lg mb-6"></p>
@@ -129,7 +160,7 @@
       <p id="final-score" class="text-6xl font-extrabold text-yellow-400"></p>
       <p class="text-purple-200 mt-2">dari 100 poin</p>
      </div>
-     <div class="grid grid-cols-2 gap-4 mb-6">
+     <div class="grid grid-cols-2 gap-4 mb-4">
       <div class="bg-emerald-500/20 rounded-xl p-4">
        <p class="text-emerald-300 text-sm">Benar</p>
        <p id="correct-count" class="text-3xl font-bold text-emerald-400"></p>
@@ -138,7 +169,15 @@
        <p class="text-red-300 text-sm">Salah</p>
        <p id="wrong-count" class="text-3xl font-bold text-red-400"></p>
       </div>
+     </div>
+     <div class="bg-purple-500/20 rounded-xl p-4 mb-6">
+      <p class="text-purple-300 text-sm">Percobaan Ke-</p>
+      <p id="attempt-count" class="text-3xl font-bold text-purple-400"></p>
      </div><button id="retry-btn" class="w-full py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-purple-900 font-bold text-xl rounded-2xl hover:from-yellow-300 hover:to-orange-400 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg"> 🔄 Ulangi Kuis </button>
+    </div><!-- Review Section -->
+    <div id="review-section" class="mt-6 bg-white/10 backdrop-blur-md rounded-3xl p-6 md:p-8 hidden">
+     <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">📋 Pembahasan Soal</h2>
+     <div id="review-container" class="space-y-4"></div>
     </div>
    </div>
   </div>
@@ -196,7 +235,7 @@
       },
       {
         type: "Menentukan Suku ke-n",
-        question: "Barisan aritmatika dengan a = 2 dan b = 6. Nilai U₂₀ adalah...",
+        question: "Barisan aritmatika dengan a = 2 dan b = 6. Nilai U��₀ adalah...",
         options: ["110", "116", "122", "128"],
         correct: 1,
         explanation: "U₂₀ = 2 + (20-1) × 6 = 2 + 114 = 116"
@@ -227,11 +266,17 @@
     let currentQuestion = 0;
     let score = 0;
     let answered = false;
+    let studentName = '';
+    let studentClass = '';
+    let attemptCount = 0;
 
     // DOM Elements
     const startScreen = document.getElementById('start-screen');
     const quizScreen = document.getElementById('quiz-screen');
     const resultScreen = document.getElementById('result-screen');
+    const identityForm = document.getElementById('identity-form');
+    const studentNameInput = document.getElementById('student-name');
+    const studentClassInput = document.getElementById('student-class');
     const startBtn = document.getElementById('start-btn');
     const nextBtn = document.getElementById('next-btn');
     const retryBtn = document.getElementById('retry-btn');
@@ -255,10 +300,26 @@
 
     let shuffledQuestions = [];
 
-    function startQuiz() {
+    function startQuiz(event) {
+      event.preventDefault();
+      
+      studentName = studentNameInput.value.trim();
+      studentClass = studentClassInput.value.trim();
+      
+      if (!studentName || !studentClass) {
+        return;
+      }
+      
+      // Display student info
+      document.getElementById('display-name').textContent = studentName;
+      document.getElementById('display-class').textContent = studentClass;
+      document.getElementById('student-initial').textContent = studentName.charAt(0).toUpperCase();
+      
       shuffledQuestions = shuffleArray(questions);
       currentQuestion = 0;
       score = 0;
+      userAnswers = [];
+      attemptCount++;
       scoreDisplay.textContent = '0';
       startScreen.classList.add('hidden');
       resultScreen.classList.add('hidden');
@@ -276,11 +337,20 @@
       currentQDisplay.textContent = currentQuestion + 1;
       progressBar.style.width = ((currentQuestion + 1) / questions.length * 100) + '%';
       
+      // Shuffle options and track correct answer
+      const optionsWithIndex = q.options.map((opt, idx) => ({ text: opt, originalIndex: idx }));
+      const shuffledOptions = shuffleArray(optionsWithIndex);
+      
+      // Find new position of correct answer
+      const newCorrectIndex = shuffledOptions.findIndex(opt => opt.originalIndex === q.correct);
+      q.shuffledCorrect = newCorrectIndex;
+      q.shuffledOptions = shuffledOptions.map(opt => opt.text);
+      
       optionsContainer.innerHTML = '';
-      q.options.forEach((option, index) => {
+      shuffledOptions.forEach((option, index) => {
         const btn = document.createElement('button');
         btn.className = 'option-btn w-full p-4 bg-white/10 backdrop-blur-sm text-white text-left rounded-xl border-2 border-transparent hover:border-yellow-400 hover:bg-white/20 font-medium';
-        btn.innerHTML = `<span class="inline-block w-8 h-8 bg-white/20 rounded-full text-center leading-8 mr-3 font-bold">${String.fromCharCode(65 + index)}</span>${option}`;
+        btn.innerHTML = `<span class="inline-block w-8 h-8 bg-white/20 rounded-full text-center leading-8 mr-3 font-bold">${String.fromCharCode(65 + index)}</span>${option.text}`;
         btn.onclick = () => selectAnswer(index);
         optionsContainer.appendChild(btn);
       });
@@ -289,38 +359,43 @@
       nextBtn.classList.add('hidden');
     }
 
+    let userAnswers = [];
+
     function selectAnswer(selected) {
       if (answered) return;
       answered = true;
       
       const q = shuffledQuestions[currentQuestion];
       const buttons = optionsContainer.querySelectorAll('button');
+      const isCorrect = selected === q.shuffledCorrect;
+      
+      // Save user answer
+      userAnswers.push({
+        question: q.question,
+        type: q.type,
+        options: q.shuffledOptions,
+        userAnswer: selected,
+        correctAnswer: q.shuffledCorrect,
+        explanation: q.explanation,
+        isCorrect: isCorrect
+      });
       
       buttons.forEach((btn, index) => {
         btn.disabled = true;
-        if (index === q.correct) {
-          btn.classList.add('correct-answer');
-        } else if (index === selected && selected !== q.correct) {
-          btn.classList.add('wrong-answer');
+        if (index === selected) {
+          btn.classList.add('option-selected');
         }
       });
       
-      if (selected === q.correct) {
+      if (isCorrect) {
         score += 10;
         scoreDisplay.textContent = score;
-        feedbackText.innerHTML = `✅ <strong>Benar!</strong> ${q.explanation}`;
-        feedback.className = 'bg-emerald-500/20 backdrop-blur-md rounded-2xl p-4 mb-6 fade-in';
-      } else {
-        feedbackText.innerHTML = `❌ <strong>Salah.</strong> ${q.explanation}`;
-        feedback.className = 'bg-red-500/20 backdrop-blur-md rounded-2xl p-4 mb-6 fade-in';
       }
-      
-      feedback.classList.remove('hidden');
       
       if (currentQuestion < questions.length - 1) {
         nextBtn.textContent = 'Soal Berikutnya →';
       } else {
-        nextBtn.textContent = 'Lihat Hasil 🎯';
+        nextBtn.textContent = 'Lihat Hasil ��';
       }
       nextBtn.classList.remove('hidden');
     }
@@ -339,6 +414,10 @@
       resultScreen.classList.remove('hidden');
       resultScreen.classList.add('fade-in');
       
+      // Display student info in result
+      document.getElementById('result-name').textContent = studentName;
+      document.getElementById('result-class').textContent = studentClass;
+      
       const percentage = score;
       const correctAnswers = score / 10;
       const wrongAnswers = 10 - correctAnswers;
@@ -346,6 +425,7 @@
       document.getElementById('final-score').textContent = percentage;
       document.getElementById('correct-count').textContent = correctAnswers;
       document.getElementById('wrong-count').textContent = wrongAnswers;
+      document.getElementById('attempt-count').textContent = attemptCount;
       
       const resultEmoji = document.getElementById('result-emoji');
       const resultTitle = document.getElementById('result-title');
@@ -368,9 +448,70 @@
         resultTitle.textContent = 'Tetap Semangat!';
         resultMessage.textContent = 'Jangan menyerah! Pelajari kembali rumus Uₙ = a + (n-1)b';
       }
+      
+      // Display review only on 10th attempt
+      if (attemptCount >= 10) {
+        document.getElementById('review-section').classList.remove('hidden');
+        displayReview();
+      } else {
+        document.getElementById('review-section').classList.add('hidden');
+      }
+    }
+    
+    function displayReview() {
+      const reviewContainer = document.getElementById('review-container');
+      reviewContainer.innerHTML = '';
+      
+      userAnswers.forEach((answer, index) => {
+        const reviewItem = document.createElement('div');
+        reviewItem.className = `bg-white/5 rounded-2xl p-5 border-2 ${answer.isCorrect ? 'border-emerald-500/30' : 'border-red-500/30'}`;
+        
+        const statusIcon = answer.isCorrect ? '✅' : '❌';
+        const statusColor = answer.isCorrect ? 'text-emerald-400' : 'text-red-400';
+        
+        reviewItem.innerHTML = `
+          <div class="flex items-start gap-3 mb-3">
+            <span class="text-2xl">${statusIcon}</span>
+            <div class="flex-1">
+              <div class="flex items-center gap-2 mb-2">
+                <span class="bg-white/10 px-2 py-1 rounded text-xs text-purple-200">${answer.type}</span>
+                <span class="${statusColor} font-bold text-sm">Soal ${index + 1}</span>
+              </div>
+              <p class="text-white font-medium mb-3">${answer.question}</p>
+              
+              <div class="space-y-2 mb-3">
+                ${answer.options.map((opt, idx) => {
+                  let optClass = 'bg-white/5 text-purple-200';
+                  let optIcon = String.fromCharCode(65 + idx);
+                  
+                  if (idx === answer.correctAnswer) {
+                    optClass = 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/50';
+                    optIcon = '✓ ' + optIcon;
+                  } else if (idx === answer.userAnswer && !answer.isCorrect) {
+                    optClass = 'bg-red-500/20 text-red-300 border border-red-500/50';
+                    optIcon = '✗ ' + optIcon;
+                  }
+                  
+                  return `<div class="${optClass} px-3 py-2 rounded-lg text-sm">
+                    <strong>${optIcon}.</strong> ${opt}
+                  </div>`;
+                }).join('')}
+              </div>
+              
+              <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3">
+                <p class="text-blue-300 font-semibold text-sm mb-1">💡 Pembahasan:</p>
+                <p class="text-blue-200 text-sm">${answer.explanation}</p>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        reviewContainer.appendChild(reviewItem);
+      });
     }
 
     // Event Listeners
+    identityForm.addEventListener('submit', startQuiz);
     startBtn.addEventListener('click', startQuiz);
     nextBtn.addEventListener('click', nextQuestion);
     retryBtn.addEventListener('click', () => {
@@ -413,5 +554,5 @@
       });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c446bd811573fb8',t:'MTc2OTQ3Njc2MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c4cc260a4929c69',t:'MTc2OTU2NDE5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
