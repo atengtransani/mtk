@@ -35,12 +35,16 @@
     
     .correct-answer {
       background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%) !important;
+      border-color: #38ef7d !important;
       color: white !important;
+      transform: scale(1.02);
     }
     
     .wrong-answer {
       background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%) !important;
+      border-color: #f45c43 !important;
       color: white !important;
+      transform: scale(1.02);
     }
     
     .progress-bar {
@@ -96,8 +100,8 @@
       <li class="flex items-start gap-3"><span class="bg-yellow-400 text-purple-900 rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold shrink-0">3</span> <span>Menentukan <strong>suku pertama (a)</strong> barisan aritmatika</span></li>
      </ul>
      <div class="mt-6 p-4 bg-white/10 rounded-xl">
-      <p class="text-yellow-300 font-semibold mb-2">📝 Rumus Penting:</p>
-      <p class="text-white text-lg font-mono bg-purple-900/50 p-3 rounded-lg text-center">Uₙ = a + (n - 1) �� b</p>
+      <p class="text-yellow-300 font-semibold mb-2">📐 Rumus Penting:</p>
+      <p class="text-white text-lg font-mono bg-purple-900/50 p-3 rounded-lg text-center">Uₙ = a + (n - 1) × b</p>
       <p class="text-purple-200 text-sm mt-2">Dimana: Uₙ = suku ke-n, a = suku pertama, b = beda, n = nomor suku</p>
      </div>
     </div><!-- Form Identitas -->
@@ -115,7 +119,7 @@
       <div class="flex items-center gap-2"><span class="text-2xl">❓</span> <span>Jumlah Soal</span>
       </div><span class="text-2xl font-bold text-yellow-400">10</span>
      </div>
-    </div><button type="submit" form="identity-form" id="start-btn" class="w-full py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-purple-900 font-bold text-xl rounded-2xl hover:from-yellow-300 hover:to-orange-400 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg"> 🚀 Mulai Kuis </button>
+    </div><button type="button" id="start-btn" class="w-full py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-purple-900 font-bold text-xl rounded-2xl hover:from-yellow-300 hover:to-orange-400 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg"> 🚀 Mulai Kuis </button>
    </div><!-- Quiz Screen -->
    <div id="quiz-screen" class="max-w-2xl mx-auto hidden"><!-- Student Info Display -->
     <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 mb-4 flex items-center justify-between">
@@ -129,7 +133,7 @@
      </div>
     </div><!-- Progress -->
     <div class="mb-6">
-     <div class="flex justify-between items-center text-white mb-2"><span class="font-semibold">Soal <span id="current-q">1</span> dari 10</span> <span class="font-semibold">Skor: <span id="score">0</span></span>
+     <div class="flex justify-between items-center text-white mb-2"><span class="font-semibold">Soal <span id="current-q">1</span> dari 10</span>
      </div>
      <div class="h-3 bg-white/20 rounded-full overflow-hidden">
       <div id="progress-bar" class="h-full bg-gradient-to-r from-yellow-400 to-orange-500 progress-bar" style="width: 10%"></div>
@@ -173,10 +177,10 @@
      <div class="bg-purple-500/20 rounded-xl p-4 mb-6">
       <p class="text-purple-300 text-sm">Percobaan Ke-</p>
       <p id="attempt-count" class="text-3xl font-bold text-purple-400"></p>
-     </div><button id="retry-btn" class="w-full py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-purple-900 font-bold text-xl rounded-2xl hover:from-yellow-300 hover:to-orange-400 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg"> 🔄 Ulangi Kuis </button>
+     </div><button id="retry-btn" class="w-full py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-purple-900 font-bold text-xl rounded-2xl hover:from-yellow-300 hover:to-orange-400 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg"> ��� Ulangi Kuis </button>
     </div><!-- Review Section -->
     <div id="review-section" class="mt-6 bg-white/10 backdrop-blur-md rounded-3xl p-6 md:p-8 hidden">
-     <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">📋 Pembahasan Soal</h2>
+     <h2 class="text-2xl font-bold text-white mb-4 flex items-center gap-2">📝 Pembahasan Soal</h2>
      <div id="review-container" class="space-y-4"></div>
     </div>
    </div>
@@ -265,10 +269,10 @@
 
     let currentQuestion = 0;
     let score = 0;
-    let answered = false;
     let studentName = '';
     let studentClass = '';
     let attemptCount = 0;
+    let selectedAnswerIndex = null;
 
     // DOM Elements
     const startScreen = document.getElementById('start-screen');
@@ -319,6 +323,7 @@
       currentQuestion = 0;
       score = 0;
       userAnswers = [];
+      selectedAnswerIndex = null;
       attemptCount++;
       scoreDisplay.textContent = '0';
       startScreen.classList.add('hidden');
@@ -362,36 +367,19 @@
     let userAnswers = [];
 
     function selectAnswer(selected) {
-      if (answered) return;
-      answered = true;
-      
       const q = shuffledQuestions[currentQuestion];
       const buttons = optionsContainer.querySelectorAll('button');
-      const isCorrect = selected === q.shuffledCorrect;
       
-      // Save user answer
-      userAnswers.push({
-        question: q.question,
-        type: q.type,
-        options: q.shuffledOptions,
-        userAnswer: selected,
-        correctAnswer: q.shuffledCorrect,
-        explanation: q.explanation,
-        isCorrect: isCorrect
+      // Remove previous selection highlight
+      buttons.forEach(btn => {
+        btn.classList.remove('option-selected');
       });
       
-      buttons.forEach((btn, index) => {
-        btn.disabled = true;
-        if (index === selected) {
-          btn.classList.add('option-selected');
-        }
-      });
+      // Highlight new selection
+      buttons[selected].classList.add('option-selected');
+      selectedAnswerIndex = selected;
       
-      if (isCorrect) {
-        score += 10;
-        scoreDisplay.textContent = score;
-      }
-      
+      // Show next button
       if (currentQuestion < questions.length - 1) {
         nextBtn.textContent = 'Soal Berikutnya →';
       } else {
@@ -401,6 +389,29 @@
     }
 
     function nextQuestion() {
+      // Save the answer when moving to next question
+      if (selectedAnswerIndex !== null) {
+        const q = shuffledQuestions[currentQuestion];
+        const isCorrect = selectedAnswerIndex === q.shuffledCorrect;
+        
+        userAnswers.push({
+          question: q.question,
+          type: q.type,
+          options: q.shuffledOptions,
+          userAnswer: selectedAnswerIndex,
+          correctAnswer: q.shuffledCorrect,
+          explanation: q.explanation,
+          isCorrect: isCorrect
+        });
+        
+        if (isCorrect) {
+          score += 10;
+          scoreDisplay.textContent = score;
+        }
+        
+        selectedAnswerIndex = null;
+      }
+      
       currentQuestion++;
       if (currentQuestion < questions.length) {
         loadQuestion();
@@ -499,7 +510,7 @@
               </div>
               
               <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3">
-                <p class="text-blue-300 font-semibold text-sm mb-1">💡 Pembahasan:</p>
+                <p class="text-blue-300 font-semibold text-sm mb-1">�� Pembahasan:</p>
                 <p class="text-blue-200 text-sm">${answer.explanation}</p>
               </div>
             </div>
@@ -511,8 +522,50 @@
     }
 
     // Event Listeners
-    identityForm.addEventListener('submit', startQuiz);
-    startBtn.addEventListener('click', startQuiz);
+    startBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      studentName = studentNameInput.value.trim();
+      studentClass = studentClassInput.value.trim();
+      
+      if (!studentName || !studentClass) {
+        // Highlight empty fields
+        if (!studentName) {
+          studentNameInput.style.borderColor = '#f5576c';
+        }
+        if (!studentClass) {
+          studentClassInput.style.borderColor = '#f5576c';
+        }
+        return;
+      }
+      
+      // Display student info
+      document.getElementById('display-name').textContent = studentName;
+      document.getElementById('display-class').textContent = studentClass;
+      document.getElementById('student-initial').textContent = studentName.charAt(0).toUpperCase();
+      
+      shuffledQuestions = shuffleArray(questions);
+      currentQuestion = 0;
+      score = 0;
+      userAnswers = [];
+      selectedAnswerIndex = null;
+      attemptCount++;
+      
+      startScreen.classList.add('hidden');
+      resultScreen.classList.add('hidden');
+      quizScreen.classList.remove('hidden');
+      quizScreen.classList.add('fade-in');
+      loadQuestion();
+    });
+    
+    // Reset border color on input
+    studentNameInput.addEventListener('input', () => {
+      studentNameInput.style.borderColor = '';
+    });
+    studentClassInput.addEventListener('input', () => {
+      studentClassInput.style.borderColor = '';
+    });
+    
     nextBtn.addEventListener('click', nextQuestion);
     retryBtn.addEventListener('click', () => {
       resultScreen.classList.add('hidden');
@@ -554,5 +607,5 @@
       });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c4ccdc5c1b29c69',t:'MTc2OTU2NDY1Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c5008fcc2bbf8ff',t:'MTc2OTU5ODU0MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
