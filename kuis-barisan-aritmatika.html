@@ -87,6 +87,19 @@
      </div>
      <h1 id="main-title" class="text-3xl md:text-4xl font-extrabold text-white mb-3">Kuis Barisan Aritmatika</h1>
      <p id="subject-info" class="text-purple-200 text-lg">Matematika Kelas X SMK</p>
+    </div>
+    <div class="bg-white/10 backdrop-blur-md rounded-3xl p-6 md:p-8 mb-6">
+     <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">📚 Materi yang Diujikan</h2>
+     <ul class="space-y-3 text-purple-100">
+      <li class="flex items-start gap-3"><span class="bg-yellow-400 text-purple-900 rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold shrink-0">1</span> <span>Menentukan <strong>suku ke-n (Uₙ)</strong> barisan aritmatika</span></li>
+      <li class="flex items-start gap-3"><span class="bg-yellow-400 text-purple-900 rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold shrink-0">2</span> <span>Menentukan <strong>beda (b)</strong> barisan aritmatika</span></li>
+      <li class="flex items-start gap-3"><span class="bg-yellow-400 text-purple-900 rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold shrink-0">3</span> <span>Menentukan <strong>suku pertama (a)</strong> barisan aritmatika</span></li>
+     </ul>
+     <div class="mt-6 p-4 bg-white/10 rounded-xl">
+      <p class="text-yellow-300 font-semibold mb-2">📝 Rumus Penting:</p>
+      <p class="text-white text-lg font-mono bg-purple-900/50 p-3 rounded-lg text-center">Uₙ = a + (n - 1) �� b</p>
+      <p class="text-purple-200 text-sm mt-2">Dimana: Uₙ = suku ke-n, a = suku pertama, b = beda, n = nomor suku</p>
+     </div>
     </div><!-- Form Identitas -->
     <form id="identity-form" class="bg-white/10 backdrop-blur-md rounded-3xl p-6 md:p-8 mb-6">
      <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">👤 Data Siswa</h2>
@@ -97,25 +110,12 @@
       </div>
      </div>
     </form>
-    <div class="bg-white/10 backdrop-blur-md rounded-3xl p-6 md:p-8 mb-6">
-     <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">📚 Materi yang Diujikan</h2>
-     <ul class="space-y-3 text-purple-100">
-      <li class="flex items-start gap-3"><span class="bg-yellow-400 text-purple-900 rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold shrink-0">1</span> <span>Menentukan <strong>suku ke-n (Uₙ)</strong> barisan aritmatika</span></li>
-      <li class="flex items-start gap-3"><span class="bg-yellow-400 text-purple-900 rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold shrink-0">2</span> <span>Menentukan <strong>beda (b)</strong> barisan aritmatika</span></li>
-      <li class="flex items-start gap-3"><span class="bg-yellow-400 text-purple-900 rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold shrink-0">3</span> <span>Menentukan <strong>suku pertama (a)</strong> barisan aritmatika</span></li>
-     </ul>
-     <div class="mt-6 p-4 bg-white/10 rounded-xl">
-      <p class="text-yellow-300 font-semibold mb-2">📝 Rumus Penting:</p>
-      <p class="text-white text-lg font-mono bg-purple-900/50 p-3 rounded-lg text-center">Uₙ = a + (n - 1) × b</p>
-      <p class="text-purple-200 text-sm mt-2">Dimana: Uₙ = suku ke-n, a = suku pertama, b = beda, n = nomor suku</p>
-     </div>
-    </div>
     <div class="bg-white/10 backdrop-blur-md rounded-3xl p-6 mb-6">
      <div class="flex items-center justify-between text-purple-100">
       <div class="flex items-center gap-2"><span class="text-2xl">❓</span> <span>Jumlah Soal</span>
       </div><span class="text-2xl font-bold text-yellow-400">10</span>
      </div>
-    </div><button type="submit" form="identity-form" id="start-btn" class="w-full py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-purple-900 font-bold text-xl rounded-2xl hover:from-yellow-300 hover:to-orange-400 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg"> ��� Mulai Kuis </button>
+    </div><button type="submit" form="identity-form" id="start-btn" class="w-full py-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-purple-900 font-bold text-xl rounded-2xl hover:from-yellow-300 hover:to-orange-400 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg"> 🚀 Mulai Kuis </button>
    </div><!-- Quiz Screen -->
    <div id="quiz-screen" class="max-w-2xl mx-auto hidden"><!-- Student Info Display -->
     <div class="bg-white/10 backdrop-blur-md rounded-2xl p-4 mb-4 flex items-center justify-between">
@@ -143,7 +143,7 @@
     <div id="options-container" class="space-y-3 mb-6"></div><!-- Feedback -->
     <div id="feedback" class="hidden bg-white/10 backdrop-blur-md rounded-2xl p-4 mb-6">
      <p id="feedback-text" class="text-white font-medium"></p>
-    </div><!-- Next Button --> <button id="next-btn" class="hidden w-full py-4 bg-gradient-to-r from-emerald-400 to-cyan-500 text-white font-bold text-lg rounded-2xl hover:from-emerald-300 hover:to-cyan-400 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg"> Soal Berikutnya ��� </button>
+    </div><!-- Next Button --> <button id="next-btn" class="hidden w-full py-4 bg-gradient-to-r from-emerald-400 to-cyan-500 text-white font-bold text-lg rounded-2xl hover:from-emerald-300 hover:to-cyan-400 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg"> Soal Berikutnya → </button>
    </div><!-- Result Screen -->
    <div id="result-screen" class="max-w-2xl mx-auto hidden fade-in">
     <div class="bg-white/10 backdrop-blur-md rounded-3xl p-8 text-center">
@@ -193,73 +193,73 @@
     const questions = [
       {
         type: "Menentukan Suku ke-n",
-        question: "Diketahui barisan aritmatika: 3, 7, 11, 15, ... Tentukan suku ke-10 (U₁₀)!",
+        question: "Diketahui barisan aritmatika: 3, 7, 11, 15, ... Tentukan suku ke-10 (U₁₀) dari barisan tersebut!",
         options: ["39", "43", "47", "51"],
         correct: 0,
-        explanation: "a = 3, b = 4. U₁₀ = 3 + (10-1) × 4 = 3 + 36 = 39"
+        explanation: "Diketahui: a = 3, b = 7 - 3 = 4. Rumus: U₁₀ = a + (n-1) × b = 3 + (10-1) × 4 = 3 + 36 = 39"
       },
       {
         type: "Menentukan Beda",
-        question: "Barisan aritmatika memiliki U₃ = 10 dan U₇ = 22. Berapakah beda (b) barisan tersebut?",
+        question: "Suatu barisan aritmatika memiliki suku ke-3 adalah 10 dan suku ke-7 adalah 22. Berapakah beda (b) dari barisan tersebut?",
         options: ["2", "3", "4", "5"],
         correct: 1,
-        explanation: "U₇ - U₃ = (7-3) × b → 22 - 10 = 4b → b = 3"
+        explanation: "U₇ - U₃ = (7-3) × b, maka 22 - 10 = 4b, sehingga 12 = 4b, jadi b = 3"
       },
       {
         type: "Menentukan Suku Pertama",
-        question: "Suku ke-5 suatu barisan aritmatika adalah 23 dan bedanya 4. Tentukan suku pertama (a)!",
+        question: "Suku ke-5 suatu barisan aritmatika adalah 23 dan bedanya adalah 4. Tentukan suku pertama (a) dari barisan tersebut!",
         options: ["5", "7", "9", "11"],
         correct: 1,
-        explanation: "U₅ = a + 4b → 23 = a + 4(4) → a = 23 - 16 = 7"
+        explanation: "Rumus: U₅ = a + (5-1) × b, maka 23 = a + 4 × 4, sehingga 23 = a + 16, jadi a = 7"
       },
       {
         type: "Menentukan Suku ke-n",
-        question: "Barisan aritmatika: 5, 9, 13, 17, ... Suku ke-15 adalah...",
+        question: "Diketahui barisan aritmatika: 5, 9, 13, 17, ... Tentukan suku ke-15 dari barisan tersebut!",
         options: ["57", "61", "65", "69"],
         correct: 1,
-        explanation: "a = 5, b = 4. U₁₅ = 5 + (15-1) × 4 = 5 + 56 = 61"
+        explanation: "Diketahui: a = 5, b = 9 - 5 = 4. Rumus: U₁₅ = 5 + (15-1) × 4 = 5 + 56 = 61"
       },
       {
         type: "Menentukan Beda",
-        question: "Jika U₁ = 8 dan U₁₀ = 35, maka beda barisan aritmatika tersebut adalah...",
+        question: "Jika suku pertama suatu barisan aritmatika adalah 8 dan suku ke-10 adalah 35, maka beda (b) dari barisan tersebut adalah...",
         options: ["2", "3", "4", "5"],
         correct: 1,
-        explanation: "U₁₀ = U₁ + 9b → 35 = 8 + 9b → 9b = 27 → b = 3"
+        explanation: "Rumus: U₁₀ = U₁ + 9b, maka 35 = 8 + 9b, sehingga 9b = 27, jadi b = 3"
       },
       {
         type: "Menentukan Suku Pertama",
-        question: "Suku ke-8 barisan aritmatika adalah 31 dan beda = 5. Suku pertama barisan tersebut adalah...",
+        question: "Suku ke-8 suatu barisan aritmatika adalah 31 dan bedanya adalah 5. Berapakah suku pertama (a) dari barisan tersebut?",
         options: ["-2", "-4", "2", "4"],
         correct: 1,
-        explanation: "U₈ = a + 7b → 31 = a + 7(5) → a = 31 - 35 = -4"
+        explanation: "Rumus: U₈ = a + (8-1) × b, maka 31 = a + 7 × 5, sehingga 31 = a + 35, jadi a = -4"
       },
       {
         type: "Menentukan Suku ke-n",
-        question: "Barisan aritmatika dengan a = 2 dan b = 6. Nilai U��₀ adalah...",
+        question: "Suatu barisan aritmatika diketahui suku pertama (a) = 2 dan beda (b) = 6. Tentukan nilai suku ke-20 (U₂₀) dari barisan tersebut!",
         options: ["110", "116", "122", "128"],
         correct: 1,
-        explanation: "U₂₀ = 2 + (20-1) × 6 = 2 + 114 = 116"
+        explanation: "Rumus: U₂₀ = a + (n-1) × b = 2 + (20-1) × 6 = 2 + 19 × 6 = 2 + 114 = 116"
       },
       {
         type: "Menentukan Beda",
-        question: "Barisan aritmatika: 50, 47, 44, 41, ... Beda barisan tersebut adalah...",
+        question: "Diketahui barisan aritmatika: 50, 47, 44, 41, ... Berapakah beda (b) dari barisan tersebut?",
         options: ["-3", "3", "-4", "4"],
         correct: 0,
-        explanation: "b = U₂ - U₁ = 47 - 50 = -3"
+        explanation: "Beda (b) = suku kedua - suku pertama = 47 - 50 = -3"
       },
       {
         type: "Menentukan Suku Pertama",
-        question: "U₆ = 28 dan U₁₂ = 52 pada barisan aritmatika. Suku pertama barisan adalah...",
+        question: "Suatu barisan aritmatika memiliki U₆ = 28 dan U₁₂ = 52. Tentukan suku pertama (a) dari barisan tersebut!",
         options: ["6", "8", "10", "12"],
         correct: 1,
-        explanation: "b = (52-28)/(12-6) = 24/6 = 4. U₆ = a + 5b → 28 = a + 20 → a = 8"
+        explanation: "Cari beda: b = (U₁₂ - U₆)/(12-6) = (52-28)/6 = 4. Kemudian: U₆ = a + 5b, maka 28 = a + 5 × 4, sehingga a = 8"
       },
       {
         type: "Menentukan Suku ke-n",
-        question: "Suku pertama barisan aritmatika adalah -3 dan beda 7. Suku ke-12 adalah...",
+        question: "Suku pertama suatu barisan aritmatika adalah -3 dan bedanya adalah 7. Tentukan suku ke-12 dari barisan tersebut!",
         options: ["71", "74", "77", "80"],
         correct: 1,
-        explanation: "U₁₂ = -3 + (12-1) × 7 = -3 + 77 = 74"
+        explanation: "Rumus: U₁₂ = a + (n-1) × b = -3 + (12-1) × 7 = -3 + 77 = 74"
       }
     ];
 
@@ -395,7 +395,7 @@
       if (currentQuestion < questions.length - 1) {
         nextBtn.textContent = 'Soal Berikutnya →';
       } else {
-        nextBtn.textContent = 'Lihat Hasil ��';
+        nextBtn.textContent = 'Lihat Hasil 🎯';
       }
       nextBtn.classList.remove('hidden');
     }
@@ -554,5 +554,5 @@
       });
     }
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c4cc260a4929c69',t:'MTc2OTU2NDE5MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c4ccdc5c1b29c69',t:'MTc2OTU2NDY1Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
