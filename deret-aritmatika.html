@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deret Aritmatika - Matematika Kelas X SMK</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    * {
+      font-family: 'Poppins', sans-serif;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(102, 126, 234, 0.2);
+    }
+    .formula-box {
+      background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+      border: 2px solid #4f46e5;
+    }
+    .step-number {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    .float-animation {
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fade-in {
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+    .section-card {
+      animation-delay: calc(var(--delay) * 0.1s);
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full bg-slate-950 text-white overflow-auto">
+  <div class="min-h-full w-full"><!-- Hero Section -->
+   <header class="relative overflow-hidden bg-gradient-to-br from-slate-950 via-indigo-950 to-purple-950 py-16 px-6">
+    <div class="absolute inset-0 overflow-hidden">
+     <div class="absolute -top-40 -right-40 w-80 h-80 bg-indigo-500/20 rounded-full blur-3xl"></div>
+     <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/20 rounded-full blur-3xl"></div>
+    </div>
+    <div class="relative max-w-4xl mx-auto text-center">
+     <div class="inline-flex items-center gap-2 bg-indigo-500/20 border border-indigo-400/30 rounded-full px-4 py-2 mb-6"><span class="text-2xl">📐</span> <span class="text-indigo-300 text-sm font-medium">Matematika Kelas X SMK</span>
+     </div>
+     <h1 id="main-title" class="text-4xl md:text-6xl font-extrabold mb-4 gradient-text float-animation">Deret Aritmatika</h1>
+     <p id="subtitle" class="text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed">Memahami konsep barisan dan deret aritmatika dengan mudah dan menyenangkan</p>
+     <div class="flex flex-wrap justify-center gap-4 mt-8">
+      <div class="flex items-center gap-2 bg-slate-800/50 rounded-lg px-4 py-2"><span class="text-green-400">✓</span> <span class="text-slate-300 text-sm">Teori Lengkap</span>
+      </div>
+      <div class="flex items-center gap-2 bg-slate-800/50 rounded-lg px-4 py-2"><span class="text-green-400">✓</span> <span class="text-slate-300 text-sm">Rumus Praktis</span>
+      </div>
+      <div class="flex items-center gap-2 bg-slate-800/50 rounded-lg px-4 py-2"><span class="text-green-400">✓</span> <span class="text-slate-300 text-sm">Contoh Soal</span>
+      </div>
+     </div>
+    </div>
+   </header><!-- Main Content -->
+   <main class="max-w-5xl mx-auto px-6 py-12 space-y-12"><!-- Pengertian Section -->
+    <section class="animate-fade-in section-card" style="--delay: 1">
+     <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-8 border border-slate-700 card-hover">
+      <div class="flex items-center gap-3 mb-6">
+       <div class="w-12 h-12 bg-indigo-500/20 rounded-xl flex items-center justify-center"><span class="text-2xl">📖</span>
+       </div>
+       <h2 class="text-2xl font-bold text-white">Pengertian</h2>
+      </div>
+      <div class="space-y-6">
+       <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+        <h3 class="text-lg font-semibold text-indigo-400 mb-3">🔢 Barisan Aritmatika</h3>
+        <p class="text-slate-300 leading-relaxed"><strong class="text-white">Barisan aritmatika</strong> adalah barisan bilangan yang memiliki <em class="text-indigo-400">selisih tetap</em> (beda) antara dua suku yang berurutan. Selisih tetap ini disebut <strong class="text-purple-400">beda (b)</strong>.</p>
+        <div class="mt-4 p-4 bg-indigo-950/50 rounded-lg border border-indigo-500/30">
+         <p class="text-slate-400 text-sm mb-2">Contoh barisan aritmatika:</p>
+         <p class="font-mono text-xl text-white">2, 5, 8, 11, 14, ...</p>
+         <p class="text-indigo-400 text-sm mt-2">Beda (b) = 3</p>
+        </div>
+       </div>
+       <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+        <h3 class="text-lg font-semibold text-purple-400 mb-3">➕ Deret Aritmatika</h3>
+        <p class="text-slate-300 leading-relaxed"><strong class="text-white">Deret aritmatika</strong> adalah <em class="text-purple-400">jumlah dari suku-suku</em> barisan aritmatika. Jika kita menjumlahkan semua suku dalam barisan aritmatika, maka hasilnya disebut deret aritmatika.</p>
+        <div class="mt-4 p-4 bg-purple-950/50 rounded-lg border border-purple-500/30">
+         <p class="text-slate-400 text-sm mb-2">Dari barisan: 2, 5, 8, 11, 14</p>
+         <p class="font-mono text-xl text-white">Deret: 2 + 5 + 8 + 11 + 14 = 40</p>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Rumus Section -->
+    <section class="animate-fade-in section-card" style="--delay: 2">
+     <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-8 border border-slate-700 card-hover">
+      <div class="flex items-center gap-3 mb-6">
+       <div class="w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center"><span class="text-2xl">🧮</span>
+       </div>
+       <h2 class="text-2xl font-bold text-white">Rumus-Rumus Penting</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-6"><!-- Rumus Un -->
+       <div class="formula-box rounded-xl p-6">
+        <h3 class="text-lg font-semibold text-indigo-300 mb-4">📌 Suku ke-n (U�����)</h3>
+        <div class="bg-slate-900/50 rounded-lg p-4 mb-4">
+         <p class="font-mono text-2xl text-center text-white">Uₙ = a + (n-1)b</p>
+        </div>
+        <div class="space-y-2 text-sm">
+         <p class="text-slate-400"><span class="text-indigo-400 font-semibold">Uₙ</span> = Suku ke-n</p>
+         <p class="text-slate-400"><span class="text-indigo-400 font-semibold">a</span> = Suku pertama</p>
+         <p class="text-slate-400"><span class="text-indigo-400 font-semibold">n</span> = Banyak suku</p>
+         <p class="text-slate-400"><span class="text-indigo-400 font-semibold">b</span> = Beda (selisih)</p>
+        </div>
+       </div><!-- Rumus Sn -->
+       <div class="formula-box rounded-xl p-6">
+        <h3 class="text-lg font-semibold text-purple-300 mb-4">📌 Jumlah n Suku (Sₙ)</h3>
+        <div class="bg-slate-900/50 rounded-lg p-4 mb-4 space-y-2">
+         <p class="font-mono text-xl text-center text-white">Sₙ = ½n(a + Uₙ)</p>
+         <p class="text-slate-500 text-center text-sm">atau</p>
+         <p class="font-mono text-xl text-center text-white">Sₙ = ½n(2a + (n-1)b)</p>
+        </div>
+        <div class="space-y-2 text-sm">
+         <p class="text-slate-400"><span class="text-purple-400 font-semibold">Sₙ</span> = Jumlah n suku pertama</p>
+         <p class="text-slate-400"><span class="text-purple-400 font-semibold">Uₙ</span> = Suku terakhir</p>
+        </div>
+       </div><!-- Rumus Beda -->
+       <div class="formula-box rounded-xl p-6">
+        <h3 class="text-lg font-semibold text-green-300 mb-4">📌 Beda (b)</h3>
+        <div class="bg-slate-900/50 rounded-lg p-4 mb-4">
+         <p class="font-mono text-2xl text-center text-white">b = Uₙ - Uₙ₋₁</p>
+        </div>
+        <p class="text-slate-400 text-sm">Beda adalah selisih antara dua suku yang berurutan dalam barisan aritmatika.</p>
+       </div><!-- Rumus Suku Tengah -->
+       <div class="formula-box rounded-xl p-6">
+        <h3 class="text-lg font-semibold text-amber-300 mb-4">📌 Suku Tengah (Ut)</h3>
+        <div class="bg-slate-900/50 rounded-lg p-4 mb-4">
+         <p class="font-mono text-2xl text-center text-white">Ut = ½(a + Uₙ)</p>
+        </div>
+        <p class="text-slate-400 text-sm">Berlaku jika jumlah suku ganjil. Suku tengah adalah rata-rata suku pertama dan suku terakhir.</p>
+       </div>
+      </div><!-- Video Pembelajaran -->
+      <div class="mt-8">
+       <div class="flex items-center gap-3 mb-4">
+        <div class="w-10 h-10 bg-red-500/20 rounded-xl flex items-center justify-center"><span class="text-xl">🎥</span>
+        </div>
+        <h3 class="text-xl font-bold text-white">Video Pembelajaran</h3>
+       </div>
+       <div class="bg-slate-800/50 rounded-xl p-4 border border-slate-700">
+        <p class="text-slate-400 text-sm mb-4">Tonton video penjelasan lengkap tentang Deret Aritmatika:</p>
+        <div class="relative w-full" style="padding-bottom: 56.25%;"><iframe class="absolute top-0 left-0 w-full h-full rounded-lg" src="https://www.youtube.com/embed/K1K9hjtK8TI" title="Video Pembelajaran Deret Aritmatika" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen> </iframe>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Contoh Soal Section -->
+    <section class="animate-fade-in section-card" style="--delay: 3">
+     <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-8 border border-slate-700 card-hover">
+      <div class="flex items-center gap-3 mb-6">
+       <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center"><span class="text-2xl">✏️</span>
+       </div>
+       <h2 class="text-2xl font-bold text-white">Contoh Soal &amp; Pembahasan</h2>
+      </div>
+      <div class="space-y-8"><!-- Soal 1 -->
+       <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+        <div class="flex items-center gap-2 mb-4"><span class="step-number w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm">1</span>
+         <h3 class="text-lg font-semibold text-white">Mencari Suku ke-n</h3>
+        </div>
+        <div class="bg-indigo-950/30 rounded-lg p-4 mb-4 border-l-4 border-indigo-500">
+         <p class="text-slate-300">Diketahui barisan aritmatika: <span class="font-mono text-white">3, 7, 11, 15, ...</span></p>
+         <p class="text-slate-300 mt-1">Tentukan suku ke-20!</p>
+        </div>
+        <div class="space-y-4">
+         <p class="text-green-400 font-semibold text-lg">📝 Penyelesaian:</p><!-- Langkah 1 -->
+         <div class="bg-slate-900/50 rounded-lg p-5 border-l-4 border-blue-500">
+          <p class="text-blue-400 font-semibold mb-3 flex items-center gap-2"><span class="bg-blue-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">1</span> Identifikasi Data yang Diketahui</p>
+          <div class="space-y-2 ml-8">
+           <p class="text-slate-300">• <strong class="text-white">Suku pertama (a)</strong> = 3</p>
+           <p class="text-slate-300">• <strong class="text-white">Beda (b)</strong> = suku ke-2 - suku ke-1</p>
+           <p class="font-mono text-slate-300 ml-6">b = 7 - 3 = <span class="text-green-400 font-bold">4</span></p>
+           <p class="text-slate-400 text-sm ml-6 italic">(Kita bisa cek: 11-7=4, 15-11=4, selisihnya tetap!)</p>
+           <p class="text-slate-300">• <strong class="text-white">Yang ditanya:</strong> suku ke-20, jadi <strong class="text-white">n = 20</strong></p>
+          </div>
+         </div><!-- Langkah 2 -->
+         <div class="bg-slate-900/50 rounded-lg p-5 border-l-4 border-purple-500">
+          <p class="text-purple-400 font-semibold mb-3 flex items-center gap-2"><span class="bg-purple-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">2</span> Pilih Rumus yang Tepat</p>
+          <div class="ml-8">
+           <p class="text-slate-300 mb-2">Karena mencari <strong class="text-white">suku tertentu</strong>, gunakan rumus:</p>
+           <div class="bg-purple-950/50 rounded-lg p-3 border border-purple-500/30">
+            <p class="font-mono text-xl text-center text-white">Uₙ = a + (n-1)b</p>
+           </div>
+          </div>
+         </div><!-- Langkah 3 -->
+         <div class="bg-slate-900/50 rounded-lg p-5 border-l-4 border-amber-500">
+          <p class="text-amber-400 font-semibold mb-3 flex items-center gap-2"><span class="bg-amber-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">3</span> Substitusi ke Rumus</p>
+          <div class="ml-8 space-y-2">
+           <p class="text-slate-300">Masukkan nilai a = 3, n = 20, dan b = 4 ke dalam rumus:</p>
+           <div class="bg-slate-800/50 rounded p-3 space-y-1">
+            <p class="font-mono text-slate-300">U₂₀ = a + (n-1)b</p>
+            <p class="font-mono text-slate-300">U₂₀ = 3 + (20-1) × 4</p>
+            <p class="text-slate-500 text-sm italic ml-6">↓ Hitung dalam kurung dulu</p>
+            <p class="font-mono text-slate-300">U₂₀ = 3 + (19) × 4</p>
+            <p class="text-slate-500 text-sm italic ml-6">↓ Kalikan 19 × 4</p>
+            <p class="font-mono text-slate-300">U₂₀ = 3 + 76</p>
+            <p class="text-slate-500 text-sm italic ml-6">↓ Jumlahkan</p>
+            <p class="font-mono text-2xl text-green-400 font-bold">U₂₀ = 79</p>
+           </div>
+          </div>
+         </div><!-- Kesimpulan -->
+         <div class="bg-gradient-to-r from-green-950/50 to-emerald-950/50 rounded-lg p-4 border border-green-500/40">
+          <p class="text-green-300 font-semibold mb-2 flex items-center gap-2"><span class="text-xl">✅</span> Kesimpulan:</p>
+          <p class="text-white text-lg ml-8">Jadi, <strong>suku ke-20</strong> dari barisan tersebut adalah <strong class="text-green-400 text-xl">79</strong></p>
+         </div>
+        </div>
+       </div><!-- Soal 2 -->
+       <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+        <div class="flex items-center gap-2 mb-4"><span class="step-number w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm">2</span>
+         <h3 class="text-lg font-semibold text-white">Mencari Jumlah Deret</h3>
+        </div>
+        <div class="bg-purple-950/30 rounded-lg p-4 mb-4 border-l-4 border-purple-500">
+         <p class="text-slate-300">Hitunglah jumlah 15 suku pertama dari deret aritmatika:</p>
+         <p class="font-mono text-white mt-1">5 + 8 + 11 + 14 + ...</p>
+        </div>
+        <div class="space-y-4">
+         <p class="text-green-400 font-semibold text-lg">📝 Penyelesaian:</p><!-- Langkah 1 -->
+         <div class="bg-slate-900/50 rounded-lg p-5 border-l-4 border-blue-500">
+          <p class="text-blue-400 font-semibold mb-3 flex items-center gap-2"><span class="bg-blue-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">1</span> Identifikasi Data yang Diketahui</p>
+          <div class="space-y-2 ml-8">
+           <p class="text-slate-300">• <strong class="text-white">Suku pertama (a)</strong> = 5</p>
+           <p class="text-slate-300">• <strong class="text-white">Beda (b)</strong> = suku ke-2 - suku ke-1</p>
+           <p class="font-mono text-slate-300 ml-6">b = 8 - 5 = <span class="text-green-400 font-bold">3</span></p>
+           <p class="text-slate-400 text-sm ml-6 italic">(Cek: 11-8=3, 14-11=3 ✓)</p>
+           <p class="text-slate-300">• <strong class="text-white">Yang ditanya:</strong> jumlah 15 suku pertama, jadi <strong class="text-white">n = 15</strong></p>
+          </div>
+         </div><!-- Langkah 2 -->
+         <div class="bg-slate-900/50 rounded-lg p-5 border-l-4 border-purple-500">
+          <p class="text-purple-400 font-semibold mb-3 flex items-center gap-2"><span class="bg-purple-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">2</span> Pilih Rumus yang Tepat</p>
+          <div class="ml-8">
+           <p class="text-slate-300 mb-2">Karena mencari <strong class="text-white">jumlah deret</strong>, gunakan rumus:</p>
+           <div class="bg-purple-950/50 rounded-lg p-3 border border-purple-500/30">
+            <p class="font-mono text-xl text-center text-white">Sₙ = ½n(2a + (n-1)b)</p>
+           </div>
+           <p class="text-slate-400 text-sm mt-2 italic">Rumus ini digunakan saat kita tahu a, b, dan n</p>
+          </div>
+         </div><!-- Langkah 3 -->
+         <div class="bg-slate-900/50 rounded-lg p-5 border-l-4 border-amber-500">
+          <p class="text-amber-400 font-semibold mb-3 flex items-center gap-2"><span class="bg-amber-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">3</span> Substitusi dan Hitung Bertahap</p>
+          <div class="ml-8 space-y-3">
+           <p class="text-slate-300">Masukkan nilai a = 5, n = 15, dan b = 3:</p>
+           <div class="bg-slate-800/50 rounded p-4 space-y-2">
+            <p class="font-mono text-slate-300">S₁₅ = ½n(2a + (n-1)b)</p>
+            <p class="font-mono text-slate-300">S₁₅ = ½(15)(2(5) + (15-1)3)</p>
+            <div class="my-3 pl-4 border-l-2 border-slate-600">
+             <p class="text-slate-500 text-sm mb-1">↓ Hitung bagian dalam kurung:</p>
+             <p class="font-mono text-slate-400 text-sm">• 2(5) = 10</p>
+             <p class="font-mono text-slate-400 text-sm">• (15-1) = 14</p>
+             <p class="font-mono text-slate-400 text-sm">• 14 × 3 = 42</p>
+            </div>
+            <p class="font-mono text-slate-300">S₁₅ = ½(15)(10 + 42)</p>
+            <div class="my-3 pl-4 border-l-2 border-slate-600">
+             <p class="text-slate-500 text-sm mb-1">↓ Jumlahkan dalam kurung:</p>
+             <p class="font-mono text-slate-400 text-sm">• 10 + 42 = 52</p>
+            </div>
+            <p class="font-mono text-slate-300">S₁₅ = ½(15)(52)</p>
+            <div class="my-3 pl-4 border-l-2 border-slate-600">
+             <p class="text-slate-500 text-sm mb-1">↓ Kalikan ½ × 15:</p>
+             <p class="font-mono text-slate-400 text-sm">• ½ × 15 = 7,5</p>
+            </div>
+            <p class="font-mono text-slate-300">S₁₅ = 7,5 × 52</p>
+            <div class="my-3 pl-4 border-l-2 border-slate-600">
+             <p class="text-slate-500 text-sm mb-1">↓ Kalikan terakhir:</p>
+             <p class="font-mono text-slate-400 text-sm">• 7,5 × 52 = 390</p>
+            </div>
+            <p class="font-mono text-2xl text-green-400 font-bold mt-3">S₁₅ = 390</p>
+           </div>
+          </div>
+         </div><!-- Kesimpulan -->
+         <div class="bg-gradient-to-r from-green-950/50 to-emerald-950/50 rounded-lg p-4 border border-green-500/40">
+          <p class="text-green-300 font-semibold mb-2 flex items-center gap-2"><span class="text-xl">✅</span> Kesimpulan:</p>
+          <p class="text-white text-lg ml-8">Jadi, <strong>jumlah 15 suku pertama</strong> dari deret tersebut adalah <strong class="text-green-400 text-xl">390</strong></p>
+          <p class="text-slate-400 text-sm ml-8 mt-1 italic">Artinya: 5 + 8 + 11 + 14 + ... (sampai 15 suku) = 390</p>
+         </div>
+        </div>
+       </div><!-- Soal 3 -->
+       <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+        <div class="flex items-center gap-2 mb-4"><span class="step-number w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm">3</span>
+         <h3 class="text-lg font-semibold text-white">Soal Aplikasi (Kontekstual)</h3>
+        </div>
+        <div class="bg-amber-950/30 rounded-lg p-4 mb-4 border-l-4 border-amber-500">
+         <p class="text-slate-300">Seorang pekerja menabung Rp50.000 pada minggu pertama. Setiap minggu berikutnya, ia menambah tabungannya Rp10.000 lebih banyak dari minggu sebelumnya.</p>
+         <p class="text-slate-300 mt-2">Berapa total tabungan selama 8 minggu?</p>
+        </div>
+        <div class="space-y-4">
+         <p class="text-green-400 font-semibold text-lg">📝 Penyelesaian:</p><!-- Visualisasi -->
+         <div class="bg-slate-900/50 rounded-lg p-5 border-l-4 border-cyan-500">
+          <p class="text-cyan-400 font-semibold mb-3 flex items-center gap-2"><span class="text-xl">👁️</span> Visualisasi Pola Tabungan</p>
+          <div class="ml-8 space-y-1">
+           <p class="text-slate-300 text-sm">Minggu 1: Rp50.000</p>
+           <p class="text-slate-300 text-sm">Minggu 2: Rp60.000 (50.000 + 10.000)</p>
+           <p class="text-slate-300 text-sm">Minggu 3: Rp70.000 (60.000 + 10.000)</p>
+           <p class="text-slate-300 text-sm">Minggu 4: Rp80.000 (70.000 + 10.000)</p>
+           <p class="text-slate-400 text-sm italic">... dan seterusnya</p>
+           <div class="bg-cyan-950/30 rounded p-2 mt-3 border border-cyan-500/30">
+            <p class="text-cyan-300 text-sm"><strong>Pola:</strong> Ini membentuk barisan aritmatika dengan beda tetap Rp10.000</p>
+           </div>
+          </div>
+         </div><!-- Langkah 1 -->
+         <div class="bg-slate-900/50 rounded-lg p-5 border-l-4 border-blue-500">
+          <p class="text-blue-400 font-semibold mb-3 flex items-center gap-2"><span class="bg-blue-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">1</span> Identifikasi dan Ubah ke Model Matematika</p>
+          <div class="space-y-2 ml-8">
+           <p class="text-slate-300">• <strong class="text-white">Suku pertama (a)</strong> = Rp50.000</p>
+           <p class="text-slate-400 text-sm ml-6 italic">→ Tabungan minggu pertama</p>
+           <p class="text-slate-300">• <strong class="text-white">Beda (b)</strong> = Rp10.000</p>
+           <p class="text-slate-400 text-sm ml-6 italic">→ Penambahan setiap minggu</p>
+           <p class="text-slate-300">• <strong class="text-white">Banyak suku (n)</strong> = 8</p>
+           <p class="text-slate-400 text-sm ml-6 italic">→ Total 8 minggu</p>
+           <p class="text-slate-300 mt-3">• <strong class="text-white">Yang ditanya:</strong> Total semua tabungan = <strong>S₈</strong></p>
+          </div>
+         </div><!-- Langkah 2 -->
+         <div class="bg-slate-900/50 rounded-lg p-5 border-l-4 border-purple-500">
+          <p class="text-purple-400 font-semibold mb-3 flex items-center gap-2"><span class="bg-purple-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">2</span> Pilih Rumus Jumlah Deret</p>
+          <div class="ml-8">
+           <p class="text-slate-300 mb-2">Karena mencari <strong class="text-white">total/jumlah</strong> dari beberapa minggu:</p>
+           <div class="bg-purple-950/50 rounded-lg p-3 border border-purple-500/30">
+            <p class="font-mono text-xl text-center text-white">Sₙ = ½n(2a + (n-1)b)</p>
+           </div>
+          </div>
+         </div><!-- Langkah 3 -->
+         <div class="bg-slate-900/50 rounded-lg p-5 border-l-4 border-amber-500">
+          <p class="text-amber-400 font-semibold mb-3 flex items-center gap-2"><span class="bg-amber-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">3</span> Substitusi dan Hitung</p>
+          <div class="ml-8 space-y-3">
+           <p class="text-slate-300">Masukkan: a = 50.000, n = 8, b = 10.000</p>
+           <div class="bg-slate-800/50 rounded p-4 space-y-2">
+            <p class="font-mono text-slate-300">S₈ = ½n(2a + (n-1)b)</p>
+            <p class="font-mono text-slate-300">S₈ = ½(8)(2(50.000) + (8-1)10.000)</p>
+            <div class="my-3 pl-4 border-l-2 border-slate-600">
+             <p class="text-slate-500 text-sm mb-1">↓ Hitung ½ × 8:</p>
+             <p class="font-mono text-slate-400 text-sm">• ½ × 8 = 4</p>
+            </div>
+            <p class="font-mono text-slate-300">S₈ = 4 × (2(50.000) + 7 × 10.000)</p>
+            <div class="my-3 pl-4 border-l-2 border-slate-600">
+             <p class="text-slate-500 text-sm mb-1">↓ Hitung dalam kurung:</p>
+             <p class="font-mono text-slate-400 text-sm">• 2(50.000) = 100.000</p>
+             <p class="font-mono text-slate-400 text-sm">• 7 × 10.000 = 70.000</p>
+             <p class="font-mono text-slate-400 text-sm">• 100.000 + 70.000 = 170.000</p>
+            </div>
+            <p class="font-mono text-slate-300">S₈ = 4 × 170.000</p>
+            <div class="my-3 pl-4 border-l-2 border-slate-600">
+             <p class="text-slate-500 text-sm mb-1">↓ Kalikan:</p>
+             <p class="font-mono text-slate-400 text-sm">• 4 × 170.000 = 680.000</p>
+            </div>
+            <p class="font-mono text-2xl text-green-400 font-bold mt-3">S₈ = Rp680.000</p>
+           </div>
+          </div>
+         </div><!-- Kesimpulan -->
+         <div class="bg-gradient-to-r from-green-950/50 to-emerald-950/50 rounded-lg p-4 border border-green-500/40">
+          <p class="text-green-300 font-semibold mb-2 flex items-center gap-2"><span class="text-xl">✅</span> Kesimpulan:</p>
+          <p class="text-white text-lg ml-8">Total tabungan pekerja tersebut selama 8 minggu adalah <strong class="text-green-400 text-xl">Rp680.000</strong></p>
+          <p class="text-slate-400 text-sm ml-8 mt-2 italic">💰 Rincian: 50.000 + 60.000 + 70.000 + 80.000 + 90.000 + 100.000 + 110.000 + 120.000 = 680.000</p>
+         </div>
+        </div>
+       </div><!-- Soal 4 - TINGKAT SEDANG -->
+       <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+        <div class="flex items-center gap-2 mb-4"><span class="step-number w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm">4</span>
+         <div class="flex-1">
+          <div class="flex items-center gap-2">
+           <h3 class="text-lg font-semibold text-white">Mencari Suku Pertama dan Beda</h3><span class="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-1 rounded-full font-medium border border-yellow-500/30">SEDANG</span>
+          </div>
+         </div>
+        </div>
+        <div class="bg-orange-950/30 rounded-lg p-4 mb-4 border-l-4 border-orange-500">
+         <p class="text-slate-300">Diketahui suatu barisan aritmatika memiliki suku ke-5 adalah 23 dan suku ke-9 adalah 39.</p>
+         <p class="text-slate-300 mt-2">Tentukan:</p>
+         <p class="text-slate-300">a) Suku pertama (a) dan beda (b)</p>
+         <p class="text-slate-300">b) Suku ke-15 dari barisan tersebut</p>
+        </div>
+        <div class="space-y-4">
+         <p class="text-green-400 font-semibold">Penyelesaian:</p>
+         <div class="bg-slate-900/50 rounded-lg p-4">
+          <p class="text-amber-400 font-semibold mb-3">📌 Bagian a) Mencari a dan b</p>
+          <div class="space-y-3">
+           <div>
+            <p class="text-slate-400 text-sm mb-1">Langkah 1: Buat persamaan</p>
+            <p class="font-mono text-slate-300">U₅ = a + 4b = 23 ... (1)</p>
+            <p class="font-mono text-slate-300">U₉ = a + 8b = 39 ... (2)</p>
+           </div>
+           <div>
+            <p class="text-slate-400 text-sm mb-1">Langkah 2: Eliminasi untuk mencari b</p>
+            <p class="font-mono text-slate-300 text-sm">Persamaan (2) - Persamaan (1):</p>
+            <p class="font-mono text-slate-300">(a + 8b) - (a + 4b) = 39 - 23</p>
+            <p class="font-mono text-slate-300">4b = 16</p>
+            <p class="font-mono text-xl text-green-400 font-bold">b = 4</p>
+           </div>
+           <div>
+            <p class="text-slate-400 text-sm mb-1">Langkah 3: Substitusi b ke persamaan (1)</p>
+            <p class="font-mono text-slate-300">a + 4(4) = 23</p>
+            <p class="font-mono text-slate-300">a + 16 = 23</p>
+            <p class="font-mono text-xl text-green-400 font-bold">a = 7</p>
+           </div>
+          </div>
+         </div>
+         <div class="bg-slate-900/50 rounded-lg p-4">
+          <p class="text-amber-400 font-semibold mb-3">📌 Bagian b) Mencari U₁₅</p>
+          <div class="space-y-2">
+           <p class="text-slate-400 text-sm">Menggunakan hasil: a = 7 dan b = 4</p>
+           <p class="font-mono text-slate-300">U₁₅ = a + (15-1)b</p>
+           <p class="font-mono text-slate-300">U₁₅ = 7 + 14(4)</p>
+           <p class="font-mono text-slate-300">U₁₅ = 7 + 56</p>
+           <p class="font-mono text-2xl text-green-400 font-bold">U₁₅ = 63</p>
+          </div>
+         </div>
+         <div class="bg-indigo-950/30 rounded-lg p-3 border border-indigo-500/30">
+          <p class="text-indigo-300 text-sm"><strong>💡 Kesimpulan:</strong> Suku pertama = 7, Beda = 4, dan Suku ke-15 = 63</p>
+         </div>
+        </div>
+       </div><!-- Soal 5 - TINGKAT TINGGI -->
+       <div class="bg-slate-800/50 rounded-xl p-6 border border-slate-700">
+        <div class="flex items-center gap-2 mb-4"><span class="step-number w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm">5</span>
+         <div class="flex-1">
+          <div class="flex items-center gap-2">
+           <h3 class="text-lg font-semibold text-white">Barisan Aritmatika Sisipan</h3><span class="text-xs bg-red-500/20 text-red-400 px-2 py-1 rounded-full font-medium border border-red-500/30">TINGGI</span>
+          </div>
+         </div>
+        </div>
+        <div class="bg-rose-950/30 rounded-lg p-4 mb-4 border-l-4 border-rose-500">
+         <p class="text-slate-300">Di antara bilangan 8 dan 44 disisipkan 8 bilangan sehingga terbentuk barisan aritmatika.</p>
+         <p class="text-slate-300 mt-2">Tentukan:</p>
+         <p class="text-slate-300">a) Beda barisan yang baru</p>
+         <p class="text-slate-300">b) Jumlah semua bilangan dalam barisan yang baru</p>
+        </div>
+        <div class="space-y-4">
+         <p class="text-green-400 font-semibold">Penyelesaian:</p>
+         <div class="bg-slate-900/50 rounded-lg p-4">
+          <p class="text-cyan-400 font-semibold mb-3">📊 Analisis Situasi</p>
+          <div class="space-y-2">
+           <p class="text-slate-300 text-sm">• Barisan awal: <span class="font-mono">8, ..., 44</span> (2 bilangan)</p>
+           <p class="text-slate-300 text-sm">• Disisipkan 8 bilangan di antara 8 dan 44</p>
+           <p class="text-slate-300 text-sm">• Barisan baru: <span class="font-mono">8, _, _, _, _, _, _, _, _, 44</span> (10 bilangan)</p>
+           <div class="bg-indigo-950/30 rounded p-2 mt-2 border border-indigo-500/30">
+            <p class="text-indigo-300 text-sm"><strong>Perhatikan:</strong> Bilangan 8 adalah U₁ dan 44 adalah U₁₀</p>
+           </div>
+          </div>
+         </div>
+         <div class="bg-slate-900/50 rounded-lg p-4">
+          <p class="text-amber-400 font-semibold mb-3">📌 Bagian a) Mencari beda (b)</p>
+          <div class="space-y-3">
+           <div>
+            <p class="text-slate-400 text-sm mb-1">Langkah 1: Identifikasi</p>
+            <p class="text-slate-300">a = 8 (suku pertama)</p>
+            <p class="text-slate-300">U₁₀ = 44 (suku ke-10)</p>
+            <p class="text-slate-300">n = 10 (banyak suku setelah sisipan)</p>
+           </div>
+           <div>
+            <p class="text-slate-400 text-sm mb-1">Langkah 2: Gunakan rumus Uₙ</p>
+            <p class="font-mono text-slate-300">Uₙ = a + (n-1)b</p>
+            <p class="font-mono text-slate-300">44 = 8 + (10-1)b</p>
+            <p class="font-mono text-slate-300">44 = 8 + 9b</p>
+            <p class="font-mono text-slate-300">36 = 9b</p>
+            <p class="font-mono text-xl text-green-400 font-bold">b = 4</p>
+           </div>
+           <div class="bg-purple-950/30 rounded p-3 border border-purple-500/30 mt-2">
+            <p class="text-purple-300 text-sm"><strong>Barisan lengkap:</strong></p>
+            <p class="font-mono text-white">8, 12, 16, 20, 24, 28, 32, 36, 40, 44</p>
+           </div>
+          </div>
+         </div>
+         <div class="bg-slate-900/50 rounded-lg p-4">
+          <p class="text-amber-400 font-semibold mb-3">📌 Bagian b) Mencari jumlah semua bilangan</p>
+          <div class="space-y-2">
+           <p class="text-slate-400 text-sm">Gunakan rumus Sₙ dengan n = 10, a = 8, U₁₀ = 44</p>
+           <p class="font-mono text-slate-300">Sₙ = ½n(a + Uₙ)</p>
+           <p class="font-mono text-slate-300">S₁₀ = ½(10)(8 + 44)</p>
+           <p class="font-mono text-slate-300">S₁₀ = 5 × 52</p>
+           <p class="font-mono text-2xl text-green-400 font-bold">S₁₀ = 260</p>
+          </div>
+         </div>
+         <div class="bg-gradient-to-r from-green-950/30 to-emerald-950/30 rounded-lg p-4 border border-green-500/30">
+          <p class="text-green-300 font-semibold mb-2">✅ Kesimpulan Lengkap:</p>
+          <p class="text-slate-300 text-sm">a) Beda barisan yang baru adalah <span class="text-green-400 font-bold">4</span></p>
+          <p class="text-slate-300 text-sm">b) Jumlah semua bilangan dalam barisan baru adalah <span class="text-green-400 font-bold">260</span></p>
+          <p class="text-slate-400 text-xs mt-2 italic">Barisan: 8 + 12 + 16 + 20 + 24 + 28 + 32 + 36 + 40 + 44 = 260</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Tips Section -->
+    <section class="animate-fade-in section-card" style="--delay: 4">
+     <div class="bg-gradient-to-br from-indigo-900/50 to-purple-900/50 rounded-2xl p-8 border border-indigo-500/30">
+      <div class="flex items-center gap-3 mb-6">
+       <div class="w-12 h-12 bg-yellow-500/20 rounded-xl flex items-center justify-center"><span class="text-2xl">��</span>
+       </div>
+       <h2 class="text-2xl font-bold text-white">Tips Mengerjakan Soal</h2>
+      </div>
+      <div class="grid md:grid-cols-2 gap-4">
+       <div class="bg-slate-900/50 rounded-xl p-5 border border-slate-700">
+        <div class="flex items-start gap-3"><span class="text-2xl">1���⃣</span>
+         <div>
+          <h4 class="font-semibold text-white mb-1">Identifikasi Dulu</h4>
+          <p class="text-slate-400 text-sm">Selalu tentukan nilai a, b, dan n dari soal sebelum menghitung.</p>
+         </div>
+        </div>
+       </div>
+       <div class="bg-slate-900/50 rounded-xl p-5 border border-slate-700">
+        <div class="flex items-start gap-3"><span class="text-2xl">2️⃣</span>
+         <div>
+          <h4 class="font-semibold text-white mb-1">Pilih Rumus Tepat</h4>
+          <p class="text-slate-400 text-sm">Gunakan Uₙ untuk mencari suku tertentu, Sₙ untuk jumlah deret.</p>
+         </div>
+        </div>
+       </div>
+       <div class="bg-slate-900/50 rounded-xl p-5 border border-slate-700">
+        <div class="flex items-start gap-3"><span class="text-2xl">3️⃣</span>
+         <div>
+          <h4 class="font-semibold text-white mb-1">Cek Beda (b)</h4>
+          <p class="text-slate-400 text-sm">Pastikan selisih antar suku selalu sama. Jika tidak, bukan barisan aritmatika!</p>
+         </div>
+        </div>
+       </div>
+       <div class="bg-slate-900/50 rounded-xl p-5 border border-slate-700">
+        <div class="flex items-start gap-3"><span class="text-2xl">4️⃣</span>
+         <div>
+          <h4 class="font-semibold text-white mb-1">Teliti dalam Hitung</h4>
+          <p class="text-slate-400 text-sm">Perhatikan tanda positif/negatif pada beda, terutama untuk barisan menurun.</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Latihan Mandiri -->
+    <section class="animate-fade-in section-card" style="--delay: 5">
+     <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-8 border border-slate-700 card-hover">
+      <div class="flex items-center gap-3 mb-6">
+       <div class="w-12 h-12 bg-cyan-500/20 rounded-xl flex items-center justify-center"><span class="text-2xl">📝</span>
+       </div>
+       <h2 class="text-2xl font-bold text-white">Latihan Mandiri</h2>
+      </div>
+      <p class="text-slate-400 mb-6">Kerjakan soal-soal berikut untuk mengasah pemahamanmu!</p>
+      <div class="space-y-4">
+       <div class="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+        <p class="text-slate-300"><span class="text-cyan-400 font-semibold">Soal 1:</span> Tentukan suku ke-25 dari barisan 4, 9, 14, 19, ...</p>
+       </div>
+       <div class="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+        <p class="text-slate-300"><span class="text-cyan-400 font-semibold">Soal 2:</span> Hitunglah jumlah 12 suku pertama dari deret 10 + 15 + 20 + 25 + ...</p>
+       </div>
+       <div class="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+        <p class="text-slate-300"><span class="text-cyan-400 font-semibold">Soal 3:</span> Suku ke-5 barisan aritmatika adalah 18 dan suku ke-10 adalah 33. Tentukan suku pertama dan beda!</p>
+       </div>
+       <div class="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
+        <p class="text-slate-300"><span class="text-cyan-400 font-semibold">Soal 4:</span> Seorang atlet berlari 2 km pada hari pertama. Setiap hari ia menambah jarak lari 500 m. Berapa total jarak yang ditempuh selama 10 hari?</p>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="bg-slate-900 border-t border-slate-800 py-8 px-6 mt-12">
+    <div class="max-w-4xl mx-auto text-center">
+     <div class="flex items-center justify-center gap-2 mb-3"><span class="text-2xl">📐</span> <span class="font-bold text-white">Matematika SMK</span>
+     </div>
+     <p class="text-slate-500 text-sm">Materi Deret Aritmatika - Kelas X</p>
+     <p class="text-slate-600 text-xs mt-2">Selamat belajar! 🎓</p>
+    </div>
+   </footer>
+  </div>
+  <script>
+    const defaultConfig = {
+      main_title: "Deret Aritmatika",
+      subtitle: "Memahami konsep barisan dan deret aritmatika dengan mudah dan menyenangkan",
+      background_color: "#020617",
+      surface_color: "#1e293b",
+      text_color: "#e2e8f0",
+      primary_color: "#6366f1",
+      secondary_color: "#a855f7"
+    };
+
+    let config = { ...defaultConfig };
+
+    async function onConfigChange(newConfig) {
+      config = { ...config, ...newConfig };
+      
+      // Update text content
+      document.getElementById('main-title').textContent = config.main_title || defaultConfig.main_title;
+      document.getElementById('subtitle').textContent = config.subtitle || defaultConfig.subtitle;
+      
+      // Update colors
+      const bgColor = config.background_color || defaultConfig.background_color;
+      const surfaceColor = config.surface_color || defaultConfig.surface_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const primaryColor = config.primary_color || defaultConfig.primary_color;
+      const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
+      
+      document.body.style.backgroundColor = bgColor;
+      
+      document.querySelectorAll('.bg-slate-800\\/50, .bg-slate-900\\/50').forEach(el => {
+        el.style.backgroundColor = surfaceColor;
+      });
+      
+      document.querySelectorAll('.text-slate-300, .text-slate-400').forEach(el => {
+        el.style.color = textColor;
+      });
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.surface_color || defaultConfig.surface_color,
+            set: (value) => {
+              config.surface_color = value;
+              window.elementSdk.setConfig({ surface_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              window.elementSdk.setConfig({ text_color: value });
+            }
+          },
+          {
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (value) => {
+              config.primary_color = value;
+              window.elementSdk.setConfig({ primary_color: value });
+            }
+          },
+          {
+            get: () => config.secondary_color || defaultConfig.secondary_color,
+            set: (value) => {
+              config.secondary_color = value;
+              window.elementSdk.setConfig({ secondary_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["main_title", config.main_title || defaultConfig.main_title],
+        ["subtitle", config.subtitle || defaultConfig.subtitle]
+      ]);
+    }
+
+    // Initialize SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c50d908e77bce26',t:'MTc2OTYwNzA2Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
