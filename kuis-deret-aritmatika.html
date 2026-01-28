@@ -316,13 +316,26 @@
     const dataHandler = {
       onDataChanged(data) {
         allRecords = data || [];
-        const userRecords = allRecords.filter(r => 
-          r.nama === studentData.nama && r.kelas === studentData.kelas
-        );
-        attemptCount = userRecords.length;
         
-        if (document.getElementById('attempt-display')) {
-          document.getElementById('attempt-display').textContent = attemptCount + 1;
+        // Load student data from localStorage if exists
+        const savedStudent = localStorage.getItem('studentData');
+        if (savedStudent) {
+          const parsed = JSON.parse(savedStudent);
+          if (parsed.nama && parsed.kelas) {
+            studentData = parsed;
+          }
+        }
+        
+        // Update attempt count based on current student
+        if (studentData.nama && studentData.kelas) {
+          const userRecords = allRecords.filter(r => 
+            r.nama === studentData.nama && r.kelas === studentData.kelas
+          );
+          attemptCount = userRecords.length;
+          
+          if (document.getElementById('attempt-display')) {
+            document.getElementById('attempt-display').textContent = attemptCount + 1;
+          }
         }
       }
     };
@@ -434,6 +447,9 @@
       }
       
       studentData = { nama, kelas };
+      
+      // Save to localStorage for persistence across refresh
+      localStorage.setItem('studentData', JSON.stringify(studentData));
       
       startBtn.disabled = true;
       startBtn.innerHTML = '<div class="loading-spinner mx-auto"></div>';
@@ -732,10 +748,47 @@
       document.getElementById('kelas').value = '';
       studentData = { nama: '', kelas: '' };
       attemptCount = 0;
+      
+      // Clear localStorage when returning to start
+      localStorage.removeItem('studentData');
     }
 
+    // Check for existing session on page load
+    function checkExistingSession() {
+      const savedStudent = localStorage.getItem('studentData');
+      if (savedStudent) {
+        try {
+          const parsed = JSON.parse(savedStudent);
+          if (parsed.nama && parsed.kelas) {
+            studentData = parsed;
+            
+            // Wait for data to load, then check attempt count
+            setTimeout(() => {
+              const userRecords = allRecords.filter(r => 
+                r.nama === studentData.nama && r.kelas === studentData.kelas
+              );
+              attemptCount = userRecords.length;
+              
+              // Auto-fill the form
+              document.getElementById('nama').value = studentData.nama;
+              document.getElementById('kelas').value = studentData.kelas;
+              
+              // Show info message
+              const formMessage = document.getElementById('form-message');
+              formMessage.textContent = `✅ Sesi ditemukan: ${studentData.nama} (${studentData.kelas}) - Percobaan ke-${attemptCount + 1}`;
+              formMessage.className = 'p-3 rounded-lg text-sm bg-green-100 text-green-700';
+              formMessage.classList.remove('hidden');
+            }, 1000);
+          }
+        } catch (e) {
+          localStorage.removeItem('studentData');
+        }
+      }
+    }
+    
     // Initialize on load
     initializeSDKs();
+    checkExistingSession();
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c50d7451463ce26',t:'MTc2OTYwNjk5MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c50efbc359dce26',t:'MTc2OTYwNzk5Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
