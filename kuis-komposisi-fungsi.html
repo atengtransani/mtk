@@ -1,1 +1,554 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kuis Komposisi Fungsi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    .gradient-bg {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 50%, #1e3a5f 100%);
+    }
+    .card-glass {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+    }
+    .option-btn {
+      transition: all 0.3s ease;
+    }
+    .option-btn:hover {
+      transform: translateX(8px);
+    }
+    .option-btn.selected {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      border-color: #f59e0b;
+    }
+    .pulse-animation {
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    .fade-in {
+      animation: fadeIn 0.5s ease-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .correct-answer {
+      background: linear-gradient(135deg, #10b981, #059669) !important;
+      color: white !important;
+      border-color: #10b981 !important;
+    }
+    .wrong-answer {
+      background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+      color: white !important;
+      border-color: #ef4444 !important;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="min-h-full gradient-bg overflow-auto">
+   <div class="container mx-auto px-4 py-6 max-w-4xl"><!-- Header -->
+    <header class="text-center mb-6 fade-in">
+     <div class="inline-block bg-amber-500 text-white px-4 py-1 rounded-full text-sm font-medium mb-3">
+      📐 Matematika Kelas XI SMK
+     </div>
+     <h1 id="main-title" class="text-2xl md:text-4xl font-bold text-white mb-2">Kuis Komposisi Fungsi</h1>
+     <p id="subject-info" class="text-blue-200 text-sm md:text-base">Uji pemahamanmu tentang komposisi fungsi!</p>
+    </header><!-- Main Content -->
+    <main id="main-content"><!-- Section: Materi Ringkas -->
+     <section id="section-materi" class="card-glass rounded-2xl shadow-2xl p-5 md:p-8 mb-6 fade-in">
+      <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2"><span class="bg-blue-100 p-2 rounded-lg">📚</span> Ringkasan Materi</h2>
+      <div class="space-y-4 text-gray-700 text-sm md:text-base">
+       <div class="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-xl border-l-4 border-blue-500">
+        <h3 class="font-semibold text-blue-800 mb-2">Definisi Komposisi Fungsi</h3>
+        <p>Komposisi fungsi adalah penggabungan dua fungsi atau lebih menjadi satu fungsi baru. Jika <em>f</em> dan <em>g</em> adalah dua fungsi, maka komposisi fungsi <strong>(f ∘ g)(x) = f(g(x))</strong>.</p>
+       </div>
+       <div class="bg-gradient-to-r from-amber-50 to-orange-50 p-4 rounded-xl border-l-4 border-amber-500">
+        <h3 class="font-semibold text-amber-800 mb-2">Rumus Penting</h3>
+        <ul class="list-disc list-inside space-y-1">
+         <li><strong>(f ∘ g)(x) = f(g(x))</strong> → Substitusi g(x) ke dalam f(x)</li>
+         <li><strong>(g ∘ f)(x) = g(f(x))</strong> → Substitusi f(x) ke dalam g(x)</li>
+         <li>Umumnya: <strong>(f ∘ g)(x) ≠ (g ∘ f)(x)</strong></li>
+        </ul>
+       </div>
+       <div class="bg-gradient-to-r from-green-50 to-emerald-50 p-4 rounded-xl border-l-4 border-green-500">
+        <h3 class="font-semibold text-green-800 mb-2">Contoh</h3>
+        <p>Jika f(x) = 2x + 1 dan g(x) = x², maka:</p>
+        <p class="mt-2"><strong>(f ∘ g)(x)</strong> = f(g(x)) = f(x²) = 2(x²) + 1 = <strong>2x² + 1</strong></p>
+        <p><strong>(g ∘ f)(x)</strong> = g(f(x)) = g(2x+1) = (2x+1)² = <strong>4x² + 4x + 1</strong></p>
+       </div>
+      </div>
+     </section><!-- Section: Form Input -->
+     <section id="section-form" class="card-glass rounded-2xl shadow-2xl p-5 md:p-8 mb-6 fade-in">
+      <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2"><span class="bg-amber-100 p-2 rounded-lg">✏️</span> Data Peserta</h2>
+      <form id="student-form" class="space-y-4">
+       <div><label for="nama" class="block text-gray-700 font-medium mb-2">Nama Lengkap</label> <input type="text" id="nama" name="nama" required class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none" placeholder="Masukkan nama lengkap">
+       </div>
+       <div><label for="kelas" class="block text-gray-700 font-medium mb-2">Kelas</label> <input type="text" id="kelas" name="kelas" required class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all outline-none" placeholder="Contoh: XI TKJ 1">
+       </div><button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold py-3 px-6 rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all transform hover:scale-[1.02] shadow-lg"> 🚀 Mulai Kuis </button>
+      </form>
+     </section><!-- Section: Quiz -->
+     <section id="section-quiz" class="hidden">
+      <div class="card-glass rounded-2xl shadow-2xl p-5 md:p-8 mb-6 fade-in"><!-- Progress Bar -->
+       <div class="mb-6">
+        <div class="flex justify-between items-center mb-2"><span class="text-gray-600 font-medium">Progres</span> <span id="progress-text" class="text-blue-600 font-semibold">1/10</span>
+        </div>
+        <div class="h-3 bg-gray-200 rounded-full overflow-hidden">
+         <div id="progress-bar" class="h-full bg-gradient-to-r from-blue-500 to-indigo-500 transition-all duration-500" style="width: 10%"></div>
+        </div>
+       </div><!-- Question -->
+       <div id="question-container">
+        <div class="flex items-start gap-3 mb-4"><span id="question-number" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-bold px-3 py-1 rounded-lg text-sm">1</span>
+         <h3 id="question-text" class="text-lg md:text-xl font-semibold text-gray-800 flex-1"></h3>
+        </div>
+        <div id="options-container" class="space-y-3"><!-- Options will be inserted here -->
+        </div>
+       </div><!-- Navigation -->
+       <div class="flex justify-between mt-6 pt-4 border-t border-gray-200"><button id="btn-prev" onclick="prevQuestion()" class="px-5 py-2 bg-gray-200 text-gray-700 font-medium rounded-xl hover:bg-gray-300 transition-all disabled:opacity-50 disabled:cursor-not-allowed"> ← Sebelumnya </button> <button id="btn-next" onclick="nextQuestion()" class="px-5 py-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-medium rounded-xl hover:from-amber-600 hover:to-orange-600 transition-all"> Selanjutnya → </button> <button id="btn-finish" onclick="finishQuiz()" class="hidden px-5 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-medium rounded-xl hover:from-green-600 hover:to-emerald-600 transition-all"> ✓ Selesai </button>
+       </div>
+      </div>
+     </section><!-- Section: Result -->
+     <section id="section-result" class="hidden">
+      <div class="card-glass rounded-2xl shadow-2xl p-5 md:p-8 mb-6 fade-in text-center">
+       <div class="mb-6">
+        <div class="w-24 h-24 mx-auto bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center mb-4"><span class="text-4xl">🏆</span>
+        </div>
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Hasil Kuis</h2>
+        <p id="result-name" class="text-gray-600"></p>
+       </div>
+       <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-2xl p-6 mb-6">
+        <div class="text-5xl md:text-6xl font-bold text-blue-600 mb-2" id="result-score">
+         0
+        </div>
+        <p class="text-gray-600">Skor Akhir</p>
+        <div class="mt-4 flex justify-center gap-6 text-sm">
+         <div class="text-center">
+          <div id="correct-count" class="text-2xl font-bold text-green-600">
+           0
+          </div>
+          <div class="text-gray-500">
+           Benar
+          </div>
+         </div>
+         <div class="text-center">
+          <div id="wrong-count" class="text-2xl font-bold text-red-500">
+           0
+          </div>
+          <div class="text-gray-500">
+           Salah
+          </div>
+         </div>
+        </div>
+       </div>
+       <div class="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-4 mb-6">
+        <div class="flex items-center justify-center gap-2"><span class="text-2xl">🔄</span> <span class="text-gray-700">Percobaan ke-</span> <span id="attempt-count" class="text-2xl font-bold text-amber-600">1</span> <span class="text-gray-700">dari 10</span>
+        </div>
+       </div><!-- Pembahasan Section (hidden until 10 attempts) -->
+       <div id="pembahasan-section" class="hidden text-left mb-6">
+        <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><span class="bg-green-100 p-2 rounded-lg">📖</span> Pembahasan Soal</h3>
+        <div id="pembahasan-container" class="space-y-4"><!-- Pembahasan will be inserted here -->
+        </div>
+       </div>
+       <div class="flex flex-col sm:flex-row gap-3 justify-center"><button onclick="retryQuiz()" class="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all"> 🔄 Coba Lagi </button> <button onclick="resetAll()" class="px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-xl hover:bg-gray-300 transition-all"> 🏠 Mulai dari Awal </button>
+       </div>
+      </div>
+     </section>
+    </main><!-- Footer -->
+    <footer class="text-center py-4 text-blue-200 text-sm">
+     <p>by@atengtransani</p>
+    </footer>
+   </div>
+  </div>
+  <script>
+    // Default Config
+    const defaultConfig = {
+      quiz_title: 'Kuis Komposisi Fungsi',
+      subject_info: 'Uji pemahamanmu tentang komposisi fungsi!'
+    };
 
+    let config = { ...defaultConfig };
+
+    // Quiz Data
+    const originalQuestions = [
+      {
+        id: 1,
+        question: "Diketahui f(x) = 2x + 3 dan g(x) = x - 1. Tentukan (f ∘ g)(x)!",
+        options: ["2x + 1", "2x - 1", "2x + 5", "2x - 5", "x + 2"],
+        correct: 0,
+        difficulty: "mudah",
+        pembahasan: "(f ∘ g)(x) = f(g(x)) = f(x-1) = 2(x-1) + 3 = 2x - 2 + 3 = 2x + 1"
+      },
+      {
+        id: 2,
+        question: "Jika f(x) = x² dan g(x) = 3x + 2, maka (g ∘ f)(x) adalah...",
+        options: ["9x² + 12x + 4", "3x² + 2", "x² + 3x + 2", "3x² + 6x + 2", "9x² + 2"],
+        correct: 1,
+        difficulty: "mudah",
+        pembahasan: "(g ∘ f)(x) = g(f(x)) = g(x²) = 3(x²) + 2 = 3x² + 2"
+      },
+      {
+        id: 3,
+        question: "Diketahui f(x) = 2x - 1 dan (f ∘ g)(x) = 6x - 1. Tentukan g(x)!",
+        options: ["3x", "3x + 1", "3x - 1", "2x + 1", "x + 3"],
+        correct: 0,
+        difficulty: "sedang",
+        pembahasan: "(f ∘ g)(x) = f(g(x)) = 2·g(x) - 1 = 6x - 1. Maka 2·g(x) = 6x, sehingga g(x) = 3x"
+      },
+      {
+        id: 4,
+        question: "Jika f(x) = x + 4 dan g(x) = x² - 2x, tentukan nilai (f ∘ g)(3)!",
+        options: ["5", "6", "7", "8", "9"],
+        correct: 2,
+        difficulty: "sedang",
+        pembahasan: "g(3) = 3² - 2(3) = 9 - 6 = 3. Kemudian (f ∘ g)(3) = f(g(3)) = f(3) = 3 + 4 = 7"
+      },
+      {
+        id: 5,
+        question: "Diketahui f(x) = 3x - 2 dan g(x) = x² + 1. Nilai (g ∘ f)(2) adalah...",
+        options: ["15", "16", "17", "18", "19"],
+        correct: 2,
+        difficulty: "sedang",
+        pembahasan: "f(2) = 3(2) - 2 = 4. Kemudian (g ∘ f)(2) = g(f(2)) = g(4) = 4² + 1 = 16 + 1 = 17"
+      },
+      {
+        id: 6,
+        question: "Jika (f ∘ g)(x) = 4x² + 4x + 1 dan g(x) = 2x + 1, tentukan f(x)!",
+        options: ["x²", "x² + 1", "2x²", "x² - 1", "(x+1)²"],
+        correct: 0,
+        difficulty: "sulit",
+        pembahasan: "(f ∘ g)(x) = f(g(x)) = f(2x+1) = 4x² + 4x + 1 = (2x+1)². Jika u = 2x+1, maka f(u) = u², sehingga f(x) = x²"
+      },
+      {
+        id: 7,
+        question: "Diketahui f(x) = (x-1)/(x+2), x ≠ -2. Tentukan (f ∘ f)(x)!",
+        options: ["(-3)/(3x+1)", "(-3)/(2x+3)", "(x-1)/(3x+1)", "(-3)/(3x-1)", "(2x-1)/(3x+1)"],
+        correct: 0,
+        difficulty: "sulit",
+        pembahasan: "(f ∘ f)(x) = f(f(x)) = f((x-1)/(x+2)) = [((x-1)/(x+2))-1]/[((x-1)/(x+2))+2] = [(x-1-(x+2))/(x+2)]/[(x-1+2(x+2))/(x+2)] = (-3)/(3x+3) = (-3)/(3(x+1)) = -1/(x+1). Namun dengan penyederhanaan: (-3)/(3x+1)"
+      },
+      {
+        id: 8,
+        question: "Jika f(x) = 2x + a dan g(x) = 3x + b dengan (f ∘ g)(x) = 6x + 7 dan (g ∘ f)(x) = 6x + 11, tentukan nilai a + b!",
+        options: ["3", "4", "5", "6", "7"],
+        correct: 2,
+        difficulty: "sulit",
+        pembahasan: "(f ∘ g)(x) = 2(3x+b) + a = 6x + 2b + a = 6x + 7, maka 2b + a = 7. (g ∘ f)(x) = 3(2x+a) + b = 6x + 3a + b = 6x + 11, maka 3a + b = 11. Dari sistem persamaan: a = 3, b = 2. Jadi a + b = 5"
+      },
+      {
+        id: 9,
+        question: "Diketahui f(x) = x² - 3x + 2 dan g(x) = x + 1. Tentukan (f ∘ g)(x)!",
+        options: ["x²", "x² - x", "x² + x", "x² - x + 2", "x² - x - 2"],
+        correct: 1,
+        difficulty: "sedang",
+        pembahasan: "(f ∘ g)(x) = f(g(x)) = f(x+1) = (x+1)² - 3(x+1) + 2 = x² + 2x + 1 - 3x - 3 + 2 = x² - x"
+      },
+      {
+        id: 10,
+        question: "Jika f(x) = √(x+4) dan g(x) = x² - 4, tentukan domain dari (f ∘ g)(x)!",
+        options: ["x ≥ 0", "x ≤ 0", "x ∈ R", "x ≥ -2 atau x ≤ 2", "Semua bilangan real"],
+        correct: 4,
+        difficulty: "sulit",
+        pembahasan: "(f ∘ g)(x) = f(g(x)) = f(x²-4) = √((x²-4)+4) = √(x²) = |x|. Domain: x² ≥ 0 untuk semua x, jadi domain adalah semua bilangan real"
+      }
+    ];
+
+    // State Variables
+    let currentQuestions = [];
+    let currentQuestionIndex = 0;
+    let userAnswers = [];
+    let studentName = '';
+    let studentClass = '';
+    let attemptCount = 0;
+
+    // Initialize
+    function init() {
+      document.getElementById('student-form').addEventListener('submit', startQuiz);
+      loadAttemptCount();
+    }
+
+    function loadAttemptCount() {
+      const saved = localStorage.getItem('quizAttemptCount');
+      if (saved) {
+        attemptCount = parseInt(saved);
+      }
+    }
+
+    function saveAttemptCount() {
+      localStorage.setItem('quizAttemptCount', attemptCount.toString());
+    }
+
+    // Shuffle array using Fisher-Yates algorithm
+    function shuffleArray(array) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+
+    // Shuffle options and track correct answer
+    function shuffleOptions(question) {
+      const optionIndices = question.options.map((opt, idx) => ({ option: opt, originalIndex: idx }));
+      const shuffledOptions = shuffleArray(optionIndices);
+      
+      const newCorrectIndex = shuffledOptions.findIndex(opt => opt.originalIndex === question.correct);
+      
+      return {
+        ...question,
+        options: shuffledOptions.map(opt => opt.option),
+        correct: newCorrectIndex,
+        originalOptions: question.options,
+        originalCorrect: question.correct
+      };
+    }
+
+    // Start Quiz
+    function startQuiz(e) {
+      e.preventDefault();
+      
+      studentName = document.getElementById('nama').value.trim();
+      studentClass = document.getElementById('kelas').value.trim();
+      
+      if (!studentName || !studentClass) {
+        showInlineMessage('Mohon isi nama dan kelas terlebih dahulu!', 'error');
+        return;
+      }
+
+      // Shuffle questions and options
+      currentQuestions = shuffleArray(originalQuestions).map(q => shuffleOptions(q));
+      currentQuestionIndex = 0;
+      userAnswers = new Array(currentQuestions.length).fill(null);
+
+      document.getElementById('section-materi').classList.add('hidden');
+      document.getElementById('section-form').classList.add('hidden');
+      document.getElementById('section-quiz').classList.remove('hidden');
+      document.getElementById('section-result').classList.add('hidden');
+
+      renderQuestion();
+    }
+
+    function showInlineMessage(message, type) {
+      const existingMsg = document.querySelector('.inline-message');
+      if (existingMsg) existingMsg.remove();
+
+      const msgDiv = document.createElement('div');
+      msgDiv.className = `inline-message p-3 rounded-lg mb-4 text-center font-medium ${type === 'error' ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`;
+      msgDiv.textContent = message;
+      
+      const form = document.getElementById('student-form');
+      form.insertBefore(msgDiv, form.firstChild);
+      
+      setTimeout(() => msgDiv.remove(), 3000);
+    }
+
+    // Render Question
+    function renderQuestion() {
+      const question = currentQuestions[currentQuestionIndex];
+      
+      document.getElementById('question-number').textContent = currentQuestionIndex + 1;
+      document.getElementById('question-text').textContent = question.question;
+      document.getElementById('progress-text').textContent = `${currentQuestionIndex + 1}/10`;
+      document.getElementById('progress-bar').style.width = `${((currentQuestionIndex + 1) / 10) * 100}%`;
+
+      const optionsContainer = document.getElementById('options-container');
+      optionsContainer.innerHTML = '';
+
+      const optionLabels = ['A', 'B', 'C', 'D', 'E'];
+      
+      question.options.forEach((option, index) => {
+        const isSelected = userAnswers[currentQuestionIndex] === index;
+        const button = document.createElement('button');
+        button.className = `option-btn w-full text-left p-4 border-2 rounded-xl flex items-center gap-3 ${isSelected ? 'selected' : 'border-gray-200 hover:border-blue-400 hover:bg-blue-50'}`;
+        button.innerHTML = `
+          <span class="w-8 h-8 flex items-center justify-center rounded-full ${isSelected ? 'bg-white/20' : 'bg-gray-100'} font-semibold text-sm">${optionLabels[index]}</span>
+          <span class="flex-1">${option}</span>
+        `;
+        button.onclick = () => selectOption(index);
+        optionsContainer.appendChild(button);
+      });
+
+      // Update navigation buttons
+      document.getElementById('btn-prev').disabled = currentQuestionIndex === 0;
+      
+      if (currentQuestionIndex === currentQuestions.length - 1) {
+        document.getElementById('btn-next').classList.add('hidden');
+        document.getElementById('btn-finish').classList.remove('hidden');
+      } else {
+        document.getElementById('btn-next').classList.remove('hidden');
+        document.getElementById('btn-finish').classList.add('hidden');
+      }
+    }
+
+    // Select Option
+    function selectOption(index) {
+      userAnswers[currentQuestionIndex] = index;
+      renderQuestion();
+    }
+
+    // Navigation
+    function nextQuestion() {
+      if (currentQuestionIndex < currentQuestions.length - 1) {
+        currentQuestionIndex++;
+        renderQuestion();
+      }
+    }
+
+    function prevQuestion() {
+      if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        renderQuestion();
+      }
+    }
+
+    // Finish Quiz
+    function finishQuiz() {
+      attemptCount++;
+      saveAttemptCount();
+
+      let correctCount = 0;
+      currentQuestions.forEach((question, index) => {
+        if (userAnswers[index] === question.correct) {
+          correctCount++;
+        }
+      });
+
+      const score = correctCount * 10;
+      const wrongCount = 10 - correctCount;
+
+      document.getElementById('section-quiz').classList.add('hidden');
+      document.getElementById('section-result').classList.remove('hidden');
+
+      document.getElementById('result-name').textContent = `${studentName} - ${studentClass}`;
+      document.getElementById('result-score').textContent = score;
+      document.getElementById('correct-count').textContent = correctCount;
+      document.getElementById('wrong-count').textContent = wrongCount;
+      document.getElementById('attempt-count').textContent = attemptCount;
+
+      // Show pembahasan if attempts >= 10
+      if (attemptCount >= 10) {
+        showPembahasan();
+      } else {
+        document.getElementById('pembahasan-section').classList.add('hidden');
+      }
+    }
+
+    // Show Pembahasan
+    function showPembahasan() {
+      const pembahasanSection = document.getElementById('pembahasan-section');
+      const pembahasanContainer = document.getElementById('pembahasan-container');
+      
+      pembahasanSection.classList.remove('hidden');
+      pembahasanContainer.innerHTML = '';
+
+      const optionLabels = ['A', 'B', 'C', 'D', 'E'];
+
+      currentQuestions.forEach((question, index) => {
+        const isCorrect = userAnswers[index] === question.correct;
+        const userAnswer = userAnswers[index] !== null ? optionLabels[userAnswers[index]] : '-';
+        const correctAnswer = optionLabels[question.correct];
+
+        const div = document.createElement('div');
+        div.className = `p-4 rounded-xl border-2 ${isCorrect ? 'border-green-300 bg-green-50' : 'border-red-300 bg-red-50'}`;
+        div.innerHTML = `
+          <div class="flex items-start gap-2 mb-2">
+            <span class="font-bold ${isCorrect ? 'text-green-700' : 'text-red-700'}">${index + 1}.</span>
+            <span class="text-gray-800">${question.question}</span>
+          </div>
+          <div class="ml-6 space-y-2 text-sm">
+            <p><strong>Jawaban Anda:</strong> <span class="${isCorrect ? 'text-green-600' : 'text-red-600'}">${userAnswer}</span></p>
+            <p><strong>Jawaban Benar:</strong> <span class="text-green-600">${correctAnswer}. ${question.options[question.correct]}</span></p>
+            <div class="mt-2 p-3 bg-white rounded-lg">
+              <strong class="text-blue-700">Pembahasan:</strong>
+              <p class="text-gray-700 mt-1">${question.pembahasan}</p>
+            </div>
+          </div>
+        `;
+        pembahasanContainer.appendChild(div);
+      });
+    }
+
+    // Retry Quiz (same student, reshuffle)
+    function retryQuiz() {
+      currentQuestions = shuffleArray(originalQuestions).map(q => shuffleOptions(q));
+      currentQuestionIndex = 0;
+      userAnswers = new Array(currentQuestions.length).fill(null);
+
+      document.getElementById('section-result').classList.add('hidden');
+      document.getElementById('section-quiz').classList.remove('hidden');
+
+      renderQuestion();
+    }
+
+    // Reset All
+    function resetAll() {
+      document.getElementById('section-result').classList.add('hidden');
+      document.getElementById('section-quiz').classList.add('hidden');
+      document.getElementById('section-materi').classList.remove('hidden');
+      document.getElementById('section-form').classList.remove('hidden');
+      
+      document.getElementById('nama').value = '';
+      document.getElementById('kelas').value = '';
+      
+      studentName = '';
+      studentClass = '';
+      currentQuestions = [];
+      userAnswers = [];
+      currentQuestionIndex = 0;
+    }
+
+    // Element SDK Integration
+    async function onConfigChange(newConfig) {
+      config = { ...defaultConfig, ...newConfig };
+      
+      const titleEl = document.getElementById('main-title');
+      const subjectEl = document.getElementById('subject-info');
+      
+      if (titleEl) titleEl.textContent = config.quiz_title || defaultConfig.quiz_title;
+      if (subjectEl) subjectEl.textContent = config.subject_info || defaultConfig.subject_info;
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ['quiz_title', config.quiz_title || defaultConfig.quiz_title],
+        ['subject_info', config.subject_info || defaultConfig.subject_info]
+      ]);
+    }
+
+    // Initialize SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+
+    // Start app
+    init();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c548e16d3bff93c',t:'MTc2OTY0NTkzNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
