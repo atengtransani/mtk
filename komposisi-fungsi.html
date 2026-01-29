@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Komposisi Fungsi - Matematika SMK Kelas XI</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&amp;family=Fira+Code:wght@400;500&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+    .font-primary {
+      font-family: 'Nunito', sans-serif;
+    }
+    .font-code {
+      font-family: 'Fira Code', monospace;
+    }
+    .gradient-hero {
+      background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 50%, #1e3a5f 100%);
+    }
+    .card-shadow {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+    .example-card {
+      border-left: 4px solid #f59e0b;
+    }
+    .trick-card {
+      border-left: 4px solid #10b981;
+    }
+    .formula-box {
+      background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    }
+    .step-number {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      font-weight: 700;
+    }
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    .accordion-content.open {
+      max-height: 2000px;
+    }
+    .difficulty-easy {
+      background: #d1fae5;
+      color: #065f46;
+    }
+    .difficulty-medium {
+      background: #fef3c7;
+      color: #92400e;
+    }
+    .difficulty-hard {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+    .quiz-btn {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      transition: all 0.3s ease;
+    }
+    .quiz-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .float-animation {
+      animation: float 3s ease-in-out infinite;
+    }
+    .nav-link {
+      position: relative;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #f59e0b;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full font-primary bg-slate-50 text-slate-800">
+  <div class="h-full w-full overflow-auto"><!-- Navigation -->
+   <nav class="bg-white/95 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
+    <div class="max-w-6xl mx-auto px-4 py-3">
+     <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2"><span class="text-2xl">📐</span> <span class="font-bold text-lg text-slate-700">MatematikaSMK</span>
+      </div>
+      <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600"><a href="#materi" class="nav-link hover:text-amber-600">Materi</a> <a href="#contoh" class="nav-link hover:text-amber-600">Contoh Soal</a> <a href="#trik" class="nav-link hover:text-amber-600">Trik</a> <a href="https://atengtransani.github.io/mtk/komposisi-fungsi.html" target="_blank" rel="noopener noreferrer" class="quiz-btn px-4 py-2 rounded-full text-white font-bold"> 🎯 Kuis </a>
+      </div><button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-slate-100">
+       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+       </svg></button>
+     </div><!-- Mobile Menu -->
+     <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4 border-t pt-4">
+      <div class="flex flex-col gap-3"><a href="#materi" class="px-3 py-2 rounded-lg hover:bg-slate-100 font-semibold text-slate-600">📚 Materi</a> <a href="#contoh" class="px-3 py-2 rounded-lg hover:bg-slate-100 font-semibold text-slate-600">✏️ Contoh Soal</a> <a href="#trik" class="px-3 py-2 rounded-lg hover:bg-slate-100 font-semibold text-slate-600">💡 Trik</a> <a href="https://atengtransani.github.io/mtk/komposisi-fungsi.html" target="_blank" rel="noopener noreferrer" class="quiz-btn px-4 py-3 rounded-lg text-white font-bold text-center"> 🎯 Mulai Kuis </a>
+      </div>
+     </div>
+    </div>
+   </nav><!-- Hero Section -->
+   <header class="gradient-hero text-white py-16 md:py-24 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+     <div class="float-animation inline-block mb-6"><span class="text-6xl md:text-8xl">🔗</span>
+     </div>
+     <h1 id="pageTitle" class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight">Komposisi Fungsi</h1>
+     <p id="pageSubtitle" class="text-lg md:text-xl text-blue-100 mb-6 max-w-2xl mx-auto">Matematika SMK Kelas XI - Belajar dengan Cara Mudah &amp; Menyenangkan!</p>
+     <div class="flex flex-wrap justify-center gap-3 text-sm"><span class="bg-white/20 px-4 py-2 rounded-full">📖 Penjelasan Lengkap</span> <span class="bg-white/20 px-4 py-2 rounded-full">🎯 Contoh Soal</span> <span class="bg-white/20 px-4 py-2 rounded-full">💡 Tips &amp; Trik</span>
+     </div>
+    </div>
+   </header><!-- Main Content -->
+   <main class="max-w-4xl mx-auto px-4 py-12"><!-- Pengertian Section -->
+    <section id="materi" class="mb-16">
+     <div class="flex items-center gap-3 mb-6"><span class="bg-amber-500 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold">1</span>
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-800">Apa itu Komposisi Fungsi?</h2>
+     </div>
+     <div class="bg-white rounded-2xl card-shadow p-6 md:p-8 mb-8">
+      <p class="text-lg leading-relaxed mb-6"><strong>Komposisi fungsi</strong> adalah penggabungan dua atau lebih fungsi menjadi satu fungsi baru. Bayangkan seperti <span class="text-amber-600 font-semibold">mesin yang bekerja berurutan</span> - hasil dari mesin pertama menjadi bahan untuk mesin kedua! 🏭</p><!-- Formula Box -->
+      <div class="formula-box rounded-xl p-6 mb-6">
+       <h3 class="font-bold text-lg mb-3 text-amber-800">📌 Rumus Komposisi Fungsi:</h3>
+       <div class="bg-white rounded-lg p-4 text-center">
+        <p class="font-code text-xl md:text-2xl text-slate-800">(f ∘ g)(x) = f(g(x))</p>
+        <p class="text-sm text-slate-600 mt-2">Dibaca: "f komposisi g" atau "f bundaran g"</p>
+       </div>
+      </div><!-- Real Life Example -->
+      <div class="bg-blue-50 border border-blue-200 rounded-xl p-6">
+       <h3 class="font-bold text-lg mb-4 text-blue-800 flex items-center gap-2"><span>🌍</span> Contoh dalam Kehidupan Sehari-hari</h3>
+       <div class="space-y-4">
+        <div class="bg-white rounded-lg p-4">
+         <p class="font-semibold text-blue-700 mb-2">🛒 Belanja di Supermarket</p>
+         <p class="text-slate-600 mb-3">Harga setelah diskon 20% adalah <span class="font-code bg-slate-100 px-2 py-1 rounded">g(x) = 0,8x</span><br>
+           Kemudian ada potongan member Rp10.000: <span class="font-code bg-slate-100 px-2 py-1 rounded">f(x) = x - 10.000</span></p>
+         <div class="bg-amber-50 rounded-lg p-3">
+          <p class="text-sm font-semibold text-amber-800">Harga akhir = (f ∘ g)(x) = f(g(x)) = 0,8x - 10.000</p>
+         </div>
+        </div>
+        <div class="bg-white rounded-lg p-4">
+         <p class="font-semibold text-blue-700 mb-2">🚗 Perjalanan dengan Ojek Online</p>
+         <p class="text-slate-600 mb-3">Jarak tempuh tergantung waktu: <span class="font-code bg-slate-100 px-2 py-1 rounded">g(t) = 40t</span> (km/jam)<br>
+           Biaya tergantung jarak: <span class="font-code bg-slate-100 px-2 py-1 rounded">f(d) = 2500d + 5000</span></p>
+         <div class="bg-amber-50 rounded-lg p-3">
+          <p class="text-sm font-semibold text-amber-800">Biaya berdasarkan waktu = (f ∘ g)(t) = 2500(40t) + 5000 = 100.000t + 5000</p>
+         </div>
+        </div>
+        <div class="bg-white rounded-lg p-4">
+         <p class="font-semibold text-blue-700 mb-2">🌡️ Konversi Suhu</p>
+         <p class="text-slate-600 mb-3">Celsius ke Fahrenheit: <span class="font-code bg-slate-100 px-2 py-1 rounded">f(c) = (9/5)c + 32</span><br>
+           Kelvin ke Celsius: <span class="font-code bg-slate-100 px-2 py-1 rounded">g(k) = k - 273</span></p>
+         <div class="bg-amber-50 rounded-lg p-3">
+          <p class="text-sm font-semibold text-amber-800">Kelvin ke Fahrenheit = (f ∘ g)(k) = (9/5)(k - 273) + 32</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- Key Concept -->
+     <div class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-2xl p-6 md:p-8">
+      <h3 class="font-bold text-xl mb-4 flex items-center gap-2"><span>⚠️</span> Penting untuk Diingat!</h3>
+      <div class="grid md:grid-cols-2 gap-4">
+       <div class="bg-white/20 rounded-xl p-4">
+        <p class="font-semibold mb-2">✅ (f ∘ g)(x) ≠ (g ∘ f)(x)</p>
+        <p class="text-sm text-emerald-100">Urutan komposisi SANGAT penting! Hasilnya biasanya berbeda.</p>
+       </div>
+       <div class="bg-white/20 rounded-xl p-4">
+        <p class="font-semibold mb-2">✅ Kerjakan dari DALAM</p>
+        <p class="text-sm text-emerald-100">Selalu hitung fungsi dalam kurung (g(x)) terlebih dahulu!</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- Contoh Soal Section -->
+    <section id="contoh" class="mb-16">
+     <div class="flex items-center gap-3 mb-6"><span class="bg-amber-500 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold">2</span>
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-800">Contoh Soal</h2>
+     </div>
+     <div class="space-y-6"><!-- Soal 1 - Mudah -->
+      <div class="bg-white rounded-2xl card-shadow overflow-hidden"><button class="accordion-btn w-full text-left p-6 flex items-start justify-between hover:bg-slate-50 transition-colors">
+        <div class="flex-1">
+         <div class="flex items-center gap-3 mb-3"><span class="difficulty-easy text-xs font-bold px-3 py-1 rounded-full">MUDAH</span> <span class="text-slate-500 text-sm">Soal #1</span>
+         </div>
+         <p class="font-semibold text-slate-800">Diketahui f(x) = 2x + 3 dan g(x) = x - 1. Tentukan (f ∘ g)(x)!</p>
+        </div>
+        <svg class="accordion-icon w-6 h-6 text-slate-400 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg></button>
+       <div class="accordion-content">
+        <div class="px-6 pb-6 border-t border-slate-100 pt-4">
+         <div class="example-card bg-amber-50 rounded-xl p-5">
+          <h4 class="font-bold text-amber-800 mb-4">📝 Penyelesaian:</h4>
+          <div class="space-y-3">
+           <div class="flex gap-3"><span class="step-number bg-amber-500 text-white text-sm">1</span>
+            <div>
+             <p class="font-semibold text-slate-700">Tulis rumus komposisi</p>
+             <p class="font-code text-slate-600">(f ∘ g)(x) = f(g(x))</p>
+            </div>
+           </div>
+           <div class="flex gap-3"><span class="step-number bg-amber-500 text-white text-sm">2</span>
+            <div>
+             <p class="font-semibold text-slate-700">Substitusi g(x) ke f(x)</p>
+             <p class="font-code text-slate-600">f(g(x)) = f(x - 1) = 2(x - 1) + 3</p>
+            </div>
+           </div>
+           <div class="flex gap-3"><span class="step-number bg-amber-500 text-white text-sm">3</span>
+            <div>
+             <p class="font-semibold text-slate-700">Sederhanakan</p>
+             <p class="font-code text-slate-600">= 2x - 2 + 3 = 2x + 1</p>
+            </div>
+           </div>
+          </div>
+          <div class="mt-4 bg-emerald-100 rounded-lg p-3 text-center">
+           <p class="font-bold text-emerald-800">Jawaban: (f ∘ g)(x) = 2x + 1 ✅</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Soal 2 - Mudah -->
+      <div class="bg-white rounded-2xl card-shadow overflow-hidden"><button class="accordion-btn w-full text-left p-6 flex items-start justify-between hover:bg-slate-50 transition-colors">
+        <div class="flex-1">
+         <div class="flex items-center gap-3 mb-3"><span class="difficulty-easy text-xs font-bold px-3 py-1 rounded-full">MUDAH</span> <span class="text-slate-500 text-sm">Soal #2</span>
+         </div>
+         <p class="font-semibold text-slate-800">Diketahui f(x) = x² dan g(x) = x + 2. Hitung nilai (f ∘ g)(3)!</p>
+        </div>
+        <svg class="accordion-icon w-6 h-6 text-slate-400 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg></button>
+       <div class="accordion-content">
+        <div class="px-6 pb-6 border-t border-slate-100 pt-4">
+         <div class="example-card bg-amber-50 rounded-xl p-5">
+          <h4 class="font-bold text-amber-800 mb-4">📝 Penyelesaian:</h4>
+          <div class="space-y-3">
+           <div class="flex gap-3"><span class="step-number bg-amber-500 text-white text-sm">1</span>
+            <div>
+             <p class="font-semibold text-slate-700">Hitung g(3) terlebih dahulu</p>
+             <p class="font-code text-slate-600">g(3) = 3 + 2 = 5</p>
+            </div>
+           </div>
+           <div class="flex gap-3"><span class="step-number bg-amber-500 text-white text-sm">2</span>
+            <div>
+             <p class="font-semibold text-slate-700">Substitusi hasil ke f(x)</p>
+             <p class="font-code text-slate-600">f(g(3)) = f(5) = 5² = 25</p>
+            </div>
+           </div>
+          </div>
+          <div class="mt-4 bg-emerald-100 rounded-lg p-3 text-center">
+           <p class="font-bold text-emerald-800">Jawaban: (f ∘ g)(3) = 25 ✅</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Soal 3 - Sedang -->
+      <div class="bg-white rounded-2xl card-shadow overflow-hidden"><button class="accordion-btn w-full text-left p-6 flex items-start justify-between hover:bg-slate-50 transition-colors">
+        <div class="flex-1">
+         <div class="flex items-center gap-3 mb-3"><span class="difficulty-medium text-xs font-bold px-3 py-1 rounded-full">SEDANG</span> <span class="text-slate-500 text-sm">Soal #3</span>
+         </div>
+         <p class="font-semibold text-slate-800">Diketahui f(x) = 3x - 2 dan g(x) = x² + 1. Tentukan (g ∘ f)(x)!</p>
+        </div>
+        <svg class="accordion-icon w-6 h-6 text-slate-400 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg></button>
+       <div class="accordion-content">
+        <div class="px-6 pb-6 border-t border-slate-100 pt-4">
+         <div class="example-card bg-amber-50 rounded-xl p-5">
+          <h4 class="font-bold text-amber-800 mb-4">📝 Penyelesaian:</h4>
+          <div class="space-y-3">
+           <div class="flex gap-3"><span class="step-number bg-amber-500 text-white text-sm">1</span>
+            <div>
+             <p class="font-semibold text-slate-700">Tulis rumus (perhatikan urutannya!)</p>
+             <p class="font-code text-slate-600">(g ∘ f)(x) = g(f(x))</p>
+            </div>
+           </div>
+           <div class="flex gap-3"><span class="step-number bg-amber-500 text-white text-sm">2</span>
+            <div>
+             <p class="font-semibold text-slate-700">Substitusi f(x) = 3x - 2 ke g(x)</p>
+             <p class="font-code text-slate-600">g(f(x)) = g(3x - 2) = (3x - 2)² + 1</p>
+            </div>
+           </div>
+           <div class="flex gap-3"><span class="step-number bg-amber-500 text-white text-sm">3</span>
+            <div>
+             <p class="font-semibold text-slate-700">Kembangkan kuadrat</p>
+             <p class="font-code text-slate-600">= 9x² - 12x + 4 + 1 = 9x² - 12x + 5</p>
+            </div>
+           </div>
+          </div>
+          <div class="mt-4 bg-emerald-100 rounded-lg p-3 text-center">
+           <p class="font-bold text-emerald-800">Jawaban: (g ∘ f)(x) = 9x² - 12x + 5 ✅</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Soal 4 - Sedang -->
+      <div class="bg-white rounded-2xl card-shadow overflow-hidden"><button class="accordion-btn w-full text-left p-6 flex items-start justify-between hover:bg-slate-50 transition-colors">
+        <div class="flex-1">
+         <div class="flex items-center gap-3 mb-3"><span class="difficulty-medium text-xs font-bold px-3 py-1 rounded-full">SEDANG</span> <span class="text-slate-500 text-sm">Soal #4</span>
+         </div>
+         <p class="font-semibold text-slate-800">Diketahui f(x) = 2x + 1 dan (f ∘ g)(x) = 6x - 3. Tentukan g(x)!</p>
+        </div>
+        <svg class="accordion-icon w-6 h-6 text-slate-400 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg></button>
+       <div class="accordion-content">
+        <div class="px-6 pb-6 border-t border-slate-100 pt-4">
+         <div class="example-card bg-amber-50 rounded-xl p-5">
+          <h4 class="font-bold text-amber-800 mb-4">📝 Penyelesaian:</h4>
+          <div class="space-y-3">
+           <div class="flex gap-3"><span class="step-number bg-amber-500 text-white text-sm">1</span>
+            <div>
+             <p class="font-semibold text-slate-700">Gunakan definisi komposisi</p>
+             <p class="font-code text-slate-600">(f ∘ g)(x) = f(g(x)) = 2·g(x) + 1</p>
+            </div>
+           </div>
+           <div class="flex gap-3"><span class="step-number bg-amber-500 text-white text-sm">2</span>
+            <div>
+             <p class="font-semibold text-slate-700">Samakan dengan hasil yang diketahui</p>
+             <p class="font-code text-slate-600">2·g(x) + 1 = 6x - 3</p>
+            </div>
+           </div>
+           <div class="flex gap-3"><span class="step-number bg-amber-500 text-white text-sm">3</span>
+            <div>
+             <p class="font-semibold text-slate-700">Selesaikan untuk g(x)</p>
+             <p class="font-code text-slate-600">2·g(x) = 6x - 4</p>
+             <p class="font-code text-slate-600">g(x) = 3x - 2</p>
+            </div>
+           </div>
+          </div>
+          <div class="mt-4 bg-emerald-100 rounded-lg p-3 text-center">
+           <p class="font-bold text-emerald-800">Jawaban: g(x) = 3x - 2 ✅</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Soal 5 - Sulit -->
+      <div class="bg-white rounded-2xl card-shadow overflow-hidden"><button class="accordion-btn w-full text-left p-6 flex items-start justify-between hover:bg-slate-50 transition-colors">
+        <div class="flex-1">
+         <div class="flex items-center gap-3 mb-3"><span class="difficulty-hard text-xs font-bold px-3 py-1 rounded-full">SULIT</span> <span class="text-slate-500 text-sm">Soal #5</span>
+         </div>
+         <p class="font-semibold text-slate-800">Diketahui f(x) = (x + 1)/(x - 1), x ≠ 1 dan g(x) = 2x + 3. Tentukan (f ∘ g)(x)!</p>
+        </div>
+        <svg class="accordion-icon w-6 h-6 text-slate-400 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg></button>
+       <div class="accordion-content">
+        <div class="px-6 pb-6 border-t border-slate-100 pt-4">
+         <div class="example-card bg-amber-50 rounded-xl p-5">
+          <h4 class="font-bold text-amber-800 mb-4">📝 Penyelesaian:</h4>
+          <div class="space-y-3">
+           <div class="flex gap-3"><span class="step-number bg-amber-500 text-white text-sm">1</span>
+            <div>
+             <p class="font-semibold text-slate-700">Substitusi g(x) ke f(x)</p>
+             <p class="font-code text-slate-600">f(g(x)) = f(2x + 3) = (2x + 3 + 1)/(2x + 3 - 1)</p>
+            </div>
+           </div>
+           <div class="flex gap-3"><span class="step-number bg-amber-500 text-white text-sm">2</span>
+            <div>
+             <p class="font-semibold text-slate-700">Sederhanakan pembilang dan penyebut</p>
+             <p class="font-code text-slate-600">= (2x + 4)/(2x + 2)</p>
+            </div>
+           </div>
+           <div class="flex gap-3"><span class="step-number bg-amber-500 text-white text-sm">3</span>
+            <div>
+             <p class="font-semibold text-slate-700">Faktorkan dan sederhanakan</p>
+             <p class="font-code text-slate-600">= 2(x + 2)/2(x + 1) = (x + 2)/(x + 1)</p>
+            </div>
+           </div>
+           <div class="flex gap-3"><span class="step-number bg-amber-500 text-white text-sm">4</span>
+            <div>
+             <p class="font-semibold text-slate-700">Tentukan syarat</p>
+             <p class="font-code text-slate-600">x + 1 ≠ 0, maka x ≠ -1</p>
+            </div>
+           </div>
+          </div>
+          <div class="mt-4 bg-emerald-100 rounded-lg p-3 text-center">
+           <p class="font-bold text-emerald-800">Jawaban: (f ∘ g)(x) = (x + 2)/(x + 1), x ≠ -1 ✅</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div><!-- Soal 6 - Sulit -->
+      <div class="bg-white rounded-2xl card-shadow overflow-hidden"><button class="accordion-btn w-full text-left p-6 flex items-start justify-between hover:bg-slate-50 transition-colors">
+        <div class="flex-1">
+         <div class="flex items-center gap-3 mb-3"><span class="difficulty-hard text-xs font-bold px-3 py-1 rounded-full">SULIT</span> <span class="text-slate-500 text-sm">Soal #6</span>
+         </div>
+         <p class="font-semibold text-slate-800">Diketahui (f ∘ g)(x) = 4x² - 4x + 3 dan g(x) = 2x - 1. Tentukan f(x)!</p>
+        </div>
+        <svg class="accordion-icon w-6 h-6 text-slate-400 transition-transform flex-shrink-0 ml-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg></button>
+       <div class="accordion-content">
+        <div class="px-6 pb-6 border-t border-slate-100 pt-4">
+         <div class="example-card bg-amber-50 rounded-xl p-5">
+          <h4 class="font-bold text-amber-800 mb-4">📝 Penyelesaian:</h4>
+          <div class="space-y-3">
+           <div class="flex gap-3"><span class="step-number bg-amber-500 text-white text-sm">1</span>
+            <div>
+             <p class="font-semibold text-slate-700">Misalkan g(x) = y</p>
+             <p class="font-code text-slate-600">y = 2x - 1, maka x = (y + 1)/2</p>
+            </div>
+           </div>
+           <div class="flex gap-3"><span class="step-number bg-amber-500 text-white text-sm">2</span>
+            <div>
+             <p class="font-semibold text-slate-700">Substitusi x ke (f ∘ g)(x)</p>
+             <p class="font-code text-slate-600">f(y) = 4((y+1)/2)² - 4((y+1)/2) + 3</p>
+            </div>
+           </div>
+           <div class="flex gap-3"><span class="step-number bg-amber-500 text-white text-sm">3</span>
+            <div>
+             <p class="font-semibold text-slate-700">Sederhanakan</p>
+             <p class="font-code text-slate-600">= 4·(y+1)²/4 - 2(y+1) + 3</p>
+             <p class="font-code text-slate-600">= (y+1)² - 2(y+1) + 3</p>
+             <p class="font-code text-slate-600">= y² + 2y + 1 - 2y - 2 + 3</p>
+             <p class="font-code text-slate-600">= y² + 2</p>
+            </div>
+           </div>
+           <div class="flex gap-3"><span class="step-number bg-amber-500 text-white text-sm">4</span>
+            <div>
+             <p class="font-semibold text-slate-700">Ganti y dengan x</p>
+             <p class="font-code text-slate-600">f(x) = x² + 2</p>
+            </div>
+           </div>
+          </div>
+          <div class="mt-4 bg-emerald-100 rounded-lg p-3 text-center">
+           <p class="font-bold text-emerald-800">Jawaban: f(x) = x² + 2 ✅</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section><!-- Trik Section -->
+    <section id="trik" class="mb-16">
+     <div class="flex items-center gap-3 mb-6"><span class="bg-amber-500 text-white w-10 h-10 rounded-full flex items-center justify-center text-xl font-bold">3</span>
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-800">Tips &amp; Trik Jitu! 💡</h2>
+     </div>
+     <div class="grid md:grid-cols-2 gap-6">
+      <div class="trick-card bg-white rounded-2xl card-shadow p-6">
+       <div class="flex items-center gap-3 mb-4"><span class="text-3xl">🎯</span>
+        <h3 class="font-bold text-lg text-emerald-700">Trik "Dari Dalam"</h3>
+       </div>
+       <p class="text-slate-600 mb-4">Selalu mulai dari fungsi yang <strong>paling dalam</strong>. Untuk (f ∘ g)(x), hitung g(x) dulu, baru masukkan ke f!</p>
+       <div class="bg-emerald-50 rounded-lg p-3 font-code text-sm">
+        (f ∘ g)(x) → g(x) dulu → f(hasil)
+       </div>
+      </div>
+      <div class="trick-card bg-white rounded-2xl card-shadow p-6">
+       <div class="flex items-center gap-3 mb-4"><span class="text-3xl">🔄</span>
+        <h3 class="font-bold text-lg text-emerald-700">Trik "Ganti x"</h3>
+       </div>
+       <p class="text-slate-600 mb-4">Untuk f(g(x)), <strong>ganti semua x</strong> di f(x) dengan g(x). Simpel tapi ampuh!</p>
+       <div class="bg-emerald-50 rounded-lg p-3 font-code text-sm">
+        f(x) = 2x + 1, g(x) = 3x<br>
+         f(g(x)) = 2(3x) + 1 = 6x + 1
+       </div>
+      </div>
+      <div class="trick-card bg-white rounded-2xl card-shadow p-6">
+       <div class="flex items-center gap-3 mb-4"><span class="text-3xl">📝</span>
+        <h3 class="font-bold text-lg text-emerald-700">Trik "Pemisalan"</h3>
+       </div>
+       <p class="text-slate-600 mb-4">Untuk mencari f(x) jika diketahui (f ∘ g)(x) dan g(x), gunakan pemisalan y = g(x)!</p>
+       <div class="bg-emerald-50 rounded-lg p-3 font-code text-sm">
+        y = g(x) → cari x dalam y<br>
+         → substitusi ke (f ∘ g)(x)<br>
+         → ganti y dengan x
+       </div>
+      </div>
+      <div class="trick-card bg-white rounded-2xl card-shadow p-6">
+       <div class="flex items-center gap-3 mb-4"><span class="text-3xl">✅</span>
+        <h3 class="font-bold text-lg text-emerald-700">Trik "Verifikasi"</h3>
+       </div>
+       <p class="text-slate-600 mb-4">Selalu cek jawaban dengan substitusi angka sederhana seperti x = 0 atau x = 1!</p>
+       <div class="bg-emerald-50 rounded-lg p-3 font-code text-sm">
+        Misal: (f∘g)(0) pakai rumus<br>
+         = (f∘g)(0) hitung manual<br>
+         Kalau sama, jawaban BENAR! ✓
+       </div>
+      </div>
+     </div><!-- Kesalahan Umum -->
+     <div class="mt-8 bg-red-50 border border-red-200 rounded-2xl p-6">
+      <h3 class="font-bold text-lg mb-4 text-red-700 flex items-center gap-2"><span>⚠️</span> Kesalahan Umum yang Harus Dihindari</h3>
+      <div class="space-y-3">
+       <div class="flex items-start gap-3"><span class="text-red-500">❌</span>
+        <p class="text-slate-700">Menganggap (f ∘ g)(x) = (g ∘ f)(x) → <span class="font-semibold">SALAH!</span> Urutan sangat penting!</p>
+       </div>
+       <div class="flex items-start gap-3"><span class="text-red-500">❌</span>
+        <p class="text-slate-700">Lupa menyederhanakan hasil akhir → Selalu sederhanakan sepenuhnya!</p>
+       </div>
+       <div class="flex items-start gap-3"><span class="text-red-500">❌</span>
+        <p class="text-slate-700">Tidak memperhatikan domain/syarat → Perhatikan penyebut ≠ 0!</p>
+       </div>
+       <div class="flex items-start gap-3"><span class="text-red-500">❌</span>
+        <p class="text-slate-700">Salah mengembangkan kuadrat → Ingat: (a+b)² = a² + 2ab + b²</p>
+       </div>
+      </div>
+     </div>
+    </section><!-- Quiz CTA Section -->
+    <section class="mb-16">
+     <div class="bg-gradient-to-r from-amber-500 to-orange-500 rounded-2xl p-8 md:p-12 text-center text-white"><span class="text-5xl md:text-6xl mb-4 inline-block">🎮</span>
+      <h2 class="text-2xl md:text-3xl font-bold mb-4">Siap Menguji Kemampuanmu?</h2>
+      <p class="text-amber-100 mb-8 max-w-xl mx-auto">Sudah paham materinya? Yuk buktikan dengan mengerjakan kuis interaktif! Ada berbagai soal menarik yang menunggumu.</p><a href="https://atengtransani.github.io/mtk/komposisi-fungsi.html" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-3 bg-white text-amber-600 font-bold text-lg px-8 py-4 rounded-full hover:bg-amber-50 transition-all hover:scale-105 shadow-lg"> <span>🎯</span> Mulai Kuis Sekarang 
+       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+       </svg></a>
+     </div>
+    </section><!-- Summary Card -->
+    <section class="mb-8">
+     <div class="bg-slate-800 text-white rounded-2xl p-6 md:p-8">
+      <h2 class="text-xl font-bold mb-6 flex items-center gap-2"><span>📌</span> Ringkasan Materi</h2>
+      <div class="grid md:grid-cols-2 gap-4 text-sm">
+       <div class="bg-slate-700/50 rounded-xl p-4">
+        <p class="font-semibold text-amber-400 mb-2">Definisi</p>
+        <p class="text-slate-300">(f ∘ g)(x) = f(g(x)) - substitusi g(x) ke dalam f(x)</p>
+       </div>
+       <div class="bg-slate-700/50 rounded-xl p-4">
+        <p class="font-semibold text-amber-400 mb-2">Urutan</p>
+        <p class="text-slate-300">(f ∘ g)(x) ≠ (g ∘ f)(x) - urutan SANGAT penting!</p>
+       </div>
+       <div class="bg-slate-700/50 rounded-xl p-4">
+        <p class="font-semibold text-amber-400 mb-2">Langkah</p>
+        <p class="text-slate-300">Kerjakan dari DALAM - hitung g(x) dulu, baru f</p>
+       </div>
+       <div class="bg-slate-700/50 rounded-xl p-4">
+        <p class="font-semibold text-amber-400 mb-2">Domain</p>
+        <p class="text-slate-300">Perhatikan syarat - penyebut tidak boleh nol!</p>
+       </div>
+      </div>
+     </div>
+    </section>
+   </main><!-- Footer -->
+   <footer class="bg-slate-900 text-white py-8 px-4">
+    <div class="max-w-4xl mx-auto text-center">
+     <div class="flex items-center justify-center gap-2 mb-4"><span class="text-2xl">📐</span> <span class="font-bold">Materi Komposisi Fungsi</span>
+     </div>
+     <p class="text-slate-400 text-sm mb-4">Matematika SMK Kelas XI</p>
+     <div class="flex justify-center gap-4 mb-6"><a href="https://atengtransani.github.io/mtk/komposisi-fungsi.html" target="_blank" rel="noopener noreferrer" class="quiz-btn px-6 py-2 rounded-full text-white font-semibold text-sm"> 🎯 Kerjakan Kuis </a>
+     </div>
+     <div class="border-t border-slate-700 pt-6">
+      <p class="text-slate-400 text-sm">Made with ❤️ by <a href="https://github.com/atengtransani" target="_blank" rel="noopener noreferrer" class="text-amber-400 hover:text-amber-300 font-semibold">@atengtransani</a></p>
+     </div>
+    </div>
+   </footer>
+  </div>
+  <script>
+    // Default configuration
+    const defaultConfig = {
+      page_title: 'Komposisi Fungsi',
+      subtitle: 'Matematika SMK Kelas XI - Belajar dengan Cara Mudah & Menyenangkan!',
+      primary_color: '#1e3a5f',
+      accent_color: '#f59e0b',
+      text_color: '#1e293b',
+      bg_color: '#f8fafc',
+      surface_color: '#ffffff'
+    };
+
+    // Initialize Element SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange: async (config) => {
+          // Update page title
+          const titleEl = document.getElementById('pageTitle');
+          if (titleEl) {
+            titleEl.textContent = config.page_title || defaultConfig.page_title;
+          }
+          
+          // Update subtitle
+          const subtitleEl = document.getElementById('pageSubtitle');
+          if (subtitleEl) {
+            subtitleEl.textContent = config.subtitle || defaultConfig.subtitle;
+          }
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [
+            {
+              get: () => config.primary_color || defaultConfig.primary_color,
+              set: (value) => {
+                config.primary_color = value;
+                window.elementSdk.setConfig({ primary_color: value });
+              }
+            },
+            {
+              get: () => config.accent_color || defaultConfig.accent_color,
+              set: (value) => {
+                config.accent_color = value;
+                window.elementSdk.setConfig({ accent_color: value });
+              }
+            },
+            {
+              get: () => config.text_color || defaultConfig.text_color,
+              set: (value) => {
+                config.text_color = value;
+                window.elementSdk.setConfig({ text_color: value });
+              }
+            },
+            {
+              get: () => config.bg_color || defaultConfig.bg_color,
+              set: (value) => {
+                config.bg_color = value;
+                window.elementSdk.setConfig({ bg_color: value });
+              }
+            },
+            {
+              get: () => config.surface_color || defaultConfig.surface_color,
+              set: (value) => {
+                config.surface_color = value;
+                window.elementSdk.setConfig({ surface_color: value });
+              }
+            }
+          ],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ['page_title', config.page_title || defaultConfig.page_title],
+          ['subtitle', config.subtitle || defaultConfig.subtitle]
+        ])
+      });
+    }
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+
+    // Accordion functionality
+    document.querySelectorAll('.accordion-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const content = button.nextElementSibling;
+        const icon = button.querySelector('.accordion-icon');
+        
+        // Close all other accordions
+        document.querySelectorAll('.accordion-content').forEach(c => {
+          if (c !== content) {
+            c.classList.remove('open');
+          }
+        });
+        document.querySelectorAll('.accordion-icon').forEach(i => {
+          if (i !== icon) {
+            i.style.transform = 'rotate(0deg)';
+          }
+        });
+        
+        // Toggle current accordion
+        content.classList.toggle('open');
+        if (content.classList.contains('open')) {
+          icon.style.transform = 'rotate(180deg)';
+        } else {
+          icon.style.transform = 'rotate(0deg)';
+        }
+      });
+    });
+
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+          // Close mobile menu if open
+          if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+            mobileMenu.classList.add('hidden');
+          }
+        }
+      });
+    });
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9c547cf2d721601b',t:'MTc2OTY0NTIzMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
