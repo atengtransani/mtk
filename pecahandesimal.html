@@ -1,68 +1,313 @@
-<p>Berikut adalah rangkuman materi <strong>Bentuk Pecahan dan Desimal</strong> yang singkat, jelas, dan mudah dipahami.</p>
+<!doctype html>
+<html lang="id">
+ <head><script>window["__codeletBootstrap__"]=JSON.parse('{"A":"A","B":"20260722-05-f3252b3"}');</script><script src="/_sdk/e358eac22bd01364.telemetry_sdk.js" integrity="sha512-KPxp3rw4K8Nu9ceWJc3gyM7srgaZxiFWOVbyu260EYzzAqdz10mfo5xyXrCx+wEKtGo77JbtmwXvFLbwrGzwvw=="></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bentuk Pecahan dan Desimal</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/47669dc8496955be.editing_sdk.js" integrity="sha512-SXgqvNdy3CX4R90Kr2d0cSNYZOv6KbcxTq/tprZCtYPHhvtgc5Aagp95xl8W/LNBFpixAlLGqjQW133qbh1QAg=="></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700;800&amp;family=Source+Sans+Pro:wght@400;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #16324f;
+      --blue: #0f6cbf;
+      --blue-dark: #084c8d;
+      --cream: #fffdf7;
+      --line: #cfe2f3;
+      --orange: #f59e0b;
+      --green: #16856b;
+    }
 
-<hr>
+    * { box-sizing: border-box; }
 
-<h3>1. Bentuk Pecahan</h3>
-<p>Pecahan menyatakan bagian dari keseluruhan. Bentuk umumnya adalah:</p>
+    html { scroll-behavior: smooth; }
 
-<p style="text-align: center;">\[ \frac{a}{b} \]</p>
+    body {
+      margin: 0;
+      width: 100%;
+      color: var(--ink);
+      font-family: "Source Sans Pro", sans-serif;
+    }
 
-<ul>
-    <li><strong>\( a \) (Pembilang):</strong> Jumlah bagian yang dimiliki (bagian atas).</li>
-    <li><strong>\( b \) (Penyebut):</strong> Total seluruh bagian yang sama besar (bagian bawah). <em>Syarat: \( b \neq 0 \).</em></li>
-</ul>
+    .app-wrapper {
+      width: 100%;
+      min-height: 100%;
+      overflow: hidden;
+    }
 
-<h4>Jenis-Jenis Pecahan</h4>
-<ul>
-    <li><strong>Pecahan Biasa:</strong> Pembilang lebih kecil dari penyebut.
-        <br><em>Contoh:</em> \( \frac{1}{2} \), \( \frac{3}{4} \)
-    </li>
-    <li><strong>Pecahan Campuran:</strong> Gabungan bilangan bulat dan pecahan biasa.
-        <br><em>Contoh:</em> \( 1\frac{1}{2} \), \( 2\frac{3}{5} \)
-    </li>
-    <li><strong>Pecahan Senilai:</strong> Pecahan yang nilainya sama meski angkanya berbeda.
-        <br><em>Contoh:</em> \( \frac{1}{2} = \frac{2}{4} = \frac{5}{10} \)
-    </li>
-</ul>
+    .display-font { font-family: "Fraunces", serif; }
 
-<hr>
+    .hero-shell {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+    }
 
-<h3>2. Bentuk Desimal</h3>
-<p>Bilangan desimal adalah bentuk lain dari pecahan dengan penyebut berbasis 10, 100, 1000, dst., yang ditulis menggunakan tanda koma (<code>,</code>).</p>
+    .paper-card {
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
 
-<ul>
-    <li><strong>Nilai Tempat:</strong>
-        <ul>
-            <li><strong>0,1</strong> &rarr; Persepuluhan (\( \frac{1}{10} \))</li>
-            <li><strong>0,01</strong> &rarr; Perseratusan (\( \frac{1}{100} \))</li>
-            <li><strong>0,001</strong> &rarr; Perseribuan (\( \frac{1}{1000} \))</li>
-        </ul>
-    </li>
-</ul>
+    .lesson-card {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
 
-<hr>
+    .lesson-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
 
-<h3>3. Cara Mengubah Bentuk</h3>
+    .section-number {
+      display: inline-grid;
+      place-items: center;
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 50%;
+      color: white;
+      background: var(--blue);
+      font-weight: 700;
+      flex: 0 0 auto;
+    }
 
-<h4>A. Pecahan ke Desimal</h4>
-<p>Ubah penyebut menjadi 10, 100, atau 1000, atau gunakan pembagian kurung (porogapit).</p>
-<ul>
-    <li>\( \frac{1}{2} = \frac{1 \times 5}{2 \times 5} = \frac{5}{10} = \mathbf{0,5} \)</li>
-    <li>\( \frac{3}{4} = \frac{3 \times 25}{4 \times 25} = \frac{75}{100} = \mathbf{0,75} \)</li>
-</ul>
+    .fraction {
+      display: inline-flex;
+      vertical-align: middle;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      margin: 0 .14em;
+      min-width: 1.4em;
+    }
 
-<h4>B. Desimal ke Pecahan</h4>
-<p>Ubah desimal menjadi pecahan per 10, 100, dst., lalu sederhanakan.</p>
-<ul>
-    <li>\( 0,4 = \frac{4}{10} = \frac{4 \div 2}{10 \div 2} = \mathbf{\frac{2}{5}} \)</li>
-    <li>\( 0,25 = \frac{25}{100} = \frac{25 \div 25}{100 \div 25} = \mathbf{\frac{1}{4}} \)</li>
-</ul>
+    .fraction .top {
+      width: 100%;
+      padding: 0 .16em .12em;
+      text-align: center;
+      border-bottom: 1.7px solid currentColor;
+    }
 
-<blockquote style="background-color: #f8f9fa; border-left: 4px solid #0f6cbf; padding: 12px 16px; margin: 20px 0; border-radius: 4px;">
-    <p style="margin-bottom: 8px;"><strong>Rangkuman Cepat:</strong></p>
-    <ul style="margin-bottom: 0;">
-        <li>\( \frac{1}{4} = 0,25 \)</li>
-        <li>\( \frac{1}{2} = 0,5 \)</li>
-        <li>\( \frac{3}{4} = 0,75 \)</li>
-    </ul>
-</blockquote>
+    .fraction .bottom {
+      padding-top: .12em;
+      text-align: center;
+    }
+
+    .mixed-number {
+      display: inline-flex;
+      align-items: center;
+      gap: .08em;
+    }
+
+    .equation-row {
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: thin;
+    }
+
+    .marker {
+      background: linear-gradient(transparent 62%, rgba(245, 158, 11, .32) 62%);
+    }
+
+    .nav-button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid #fbbf24;
+      outline-offset: 3px;
+    }
+
+    .reveal {
+      animation: rise .65s ease both;
+    }
+
+    .delay-1 { animation-delay: .08s; }
+    .delay-2 { animation-delay: .16s; }
+    .delay-3 { animation-delay: .24s; }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { animation: none; }
+      .lesson-card { transition: none; }
+    }
+  </style>
+  <script src="/_sdk/935a53bc2e11fb8d.data_sdk.js" type="text/javascript" integrity="sha512-qr2oyPnEys1WebcOABaRh6hG77r5PWpqeWW6JTKbRJqly/INsfBi31CVNlTmHqjgeLpkVmmHZJUdxSx/32tOFQ=="></script>
+  <script src="/_sdk/7831c9b82769a23f.resizing_sdk.js" type="text/javascript" integrity="sha512-8T/qhF3yB5dtqHof6yvY2492zFsme1nYV1+FuXfYvPz63uo2L30fnKiOabmH0Sl3qhplMLgxjytDR8IvycRwKQ=="></script>
+ </head>
+ <body data-template-id="__page-root">
+  <div class="app-wrapper">
+   <header data-template-id="hero-section" class="canva-header hero-shell w-full px-5 py-10 sm:px-8 sm:py-14">
+    <div class="mx-auto max-w-6xl">
+     <div class="reveal flex flex-col gap-7 lg:flex-row lg:items-end lg:justify-between">
+      <div class="max-w-3xl">
+       <p data-template-id="subject-label" class="canva-tag mb-4 inline-flex rounded-full px-4 py-2 uppercase tracking-widest"></p>
+       <h1 data-template-id="page-title" class="canva-text display-font max-w-3xl leading-tight"></h1>
+       <p data-template-id="page-intro" class="canva-text mt-4 max-w-2xl leading-relaxed"></p>
+      </div>
+      <nav aria-label="Navigasi materi" class="flex flex-wrap gap-2">
+       <button data-template-id="nav-fraction" type="button" data-target="pecahan" class="canva-button nav-button rounded-full border border-white/50 px-4 py-2 shadow-sm transition hover:-translate-y-0.5"></button> <button data-template-id="nav-decimal" type="button" data-target="desimal" class="canva-button nav-button rounded-full border border-white/50 px-4 py-2 shadow-sm transition hover:-translate-y-0.5"></button> <button data-template-id="nav-conversion" type="button" data-target="konversi" class="canva-button nav-button rounded-full border border-white/50 px-4 py-2 shadow-sm transition hover:-translate-y-0.5"></button>
+      </nav>
+     </div>
+    </div>
+   </header>
+   <main class="w-full px-4 py-8 sm:px-8 sm:py-12">
+    <div class="mx-auto max-w-6xl space-y-8">
+     <section id="pecahan" data-template-id="fraction-section" class="canva-section paper-card reveal delay-1 scroll-mt-6 rounded-3xl p-5 sm:p-8">
+      <div class="flex items-start gap-4">
+       <span class="section-number" aria-hidden="true">1</span>
+       <div>
+        <h2 data-template-id="fraction-title" class="canva-text display-font leading-tight"></h2>
+        <p data-template-id="fraction-description" class="canva-text mt-2 leading-relaxed"></p>
+       </div>
+      </div>
+      <div class="mt-7 grid gap-5 lg:grid-cols-[.8fr_1.2fr]">
+       <div data-template-id="fraction-diagram" class="canva-panel flex min-h-64 flex-col items-center justify-center rounded-2xl p-6 text-center">
+        <p data-template-id="general-form-label" class="canva-text mb-4 uppercase tracking-widest"></p>
+        <div class="display-font text-7xl font-bold text-[#0f6cbf]" aria-label="a per b">
+         <span class="fraction"> <span class="top">a</span> <span class="bottom">b</span> </span>
+        </div>
+        <div class="mt-6 grid w-full grid-cols-1 gap-3 sm:grid-cols-2">
+         <div data-template-id="numerator-note" class="canva-card rounded-xl p-3"></div>
+         <div data-template-id="denominator-note" class="canva-card rounded-xl p-3"></div>
+        </div>
+        <p data-template-id="denominator-rule" class="canva-text mt-4 italic"></p>
+       </div>
+       <div>
+        <h3 data-template-id="fraction-types-title" class="canva-text display-font mb-4"></h3>
+        <div class="grid gap-4 sm:grid-cols-3">
+         <article data-template-id="common-card" class="canva-card lesson-card rounded-2xl border p-5">
+          <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-blue-100 text-[#0f6cbf]">
+           <i data-lucide="circle-divide" aria-hidden="true"></i>
+          </div>
+          <h4 data-template-id="common-title" class="canva-text font-bold"></h4>
+          <p data-template-id="common-description" class="canva-text mt-2 leading-relaxed"></p>
+          <p data-template-id="common-example" class="canva-text mt-4 rounded-lg bg-blue-50 p-3 font-semibold"></p>
+         </article>
+         <article data-template-id="mixed-card" class="canva-card lesson-card rounded-2xl border p-5">
+          <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-amber-100 text-amber-700">
+           <i data-lucide="blocks" aria-hidden="true"></i>
+          </div>
+          <h4 data-template-id="mixed-title" class="canva-text font-bold"></h4>
+          <p data-template-id="mixed-description" class="canva-text mt-2 leading-relaxed"></p>
+          <p data-template-id="mixed-example" class="canva-text mt-4 rounded-lg bg-amber-50 p-3 font-semibold"></p>
+         </article>
+         <article data-template-id="equivalent-card" class="canva-card lesson-card rounded-2xl border p-5">
+          <div class="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700">
+           <i data-lucide="equal" aria-hidden="true"></i>
+          </div>
+          <h4 data-template-id="equivalent-title" class="canva-text font-bold"></h4>
+          <p data-template-id="equivalent-description" class="canva-text mt-2 leading-relaxed"></p>
+          <p data-template-id="equivalent-example" class="canva-text mt-4 rounded-lg bg-emerald-50 p-3 font-semibold"></p>
+         </article>
+        </div>
+       </div>
+      </div>
+     </section>
+     <section id="desimal" data-template-id="decimal-section" class="canva-section paper-card reveal delay-2 scroll-mt-6 rounded-3xl p-5 sm:p-8">
+      <div class="flex items-start gap-4">
+       <span class="section-number" aria-hidden="true">2</span>
+       <div>
+        <h2 data-template-id="decimal-title" class="canva-text display-font leading-tight"></h2>
+        <p data-template-id="decimal-description" class="canva-text mt-2 max-w-4xl leading-relaxed"></p>
+       </div>
+      </div>
+      <h3 data-template-id="place-value-title" class="canva-text display-font mt-7 mb-4"></h3>
+      <div class="grid gap-4 sm:grid-cols-3">
+       <article data-template-id="tenths-card" class="canva-card lesson-card relative overflow-hidden rounded-2xl border p-5">
+        <div class="absolute right-3 top-1 text-7xl font-bold text-blue-100" aria-hidden="true">
+         1
+        </div>
+        <p data-template-id="tenths-number" class="canva-text relative font-bold"></p>
+        <h4 data-template-id="tenths-label" class="canva-text relative mt-2 font-bold"></h4>
+        <p data-template-id="tenths-fraction" class="canva-text relative mt-3"></p>
+       </article>
+       <article data-template-id="hundredths-card" class="canva-card lesson-card relative overflow-hidden rounded-2xl border p-5">
+        <div class="absolute right-3 top-1 text-7xl font-bold text-amber-100" aria-hidden="true">
+         2
+        </div>
+        <p data-template-id="hundredths-number" class="canva-text relative font-bold"></p>
+        <h4 data-template-id="hundredths-label" class="canva-text relative mt-2 font-bold"></h4>
+        <p data-template-id="hundredths-fraction" class="canva-text relative mt-3"></p>
+       </article>
+       <article data-template-id="thousandths-card" class="canva-card lesson-card relative overflow-hidden rounded-2xl border p-5">
+        <div class="absolute right-3 top-1 text-7xl font-bold text-emerald-100" aria-hidden="true">
+         3
+        </div>
+        <p data-template-id="thousandths-number" class="canva-text relative font-bold"></p>
+        <h4 data-template-id="thousandths-label" class="canva-text relative mt-2 font-bold"></h4>
+        <p data-template-id="thousandths-fraction" class="canva-text relative mt-3"></p>
+       </article>
+      </div>
+     </section>
+     <section id="konversi" data-template-id="conversion-section" class="canva-section paper-card reveal delay-3 scroll-mt-6 rounded-3xl p-5 sm:p-8">
+      <div class="flex items-start gap-4">
+       <span class="section-number" aria-hidden="true">3</span>
+       <div>
+        <h2 data-template-id="conversion-title" class="canva-text display-font leading-tight"></h2>
+        <p data-template-id="conversion-intro" class="canva-text mt-2 leading-relaxed"></p>
+       </div>
+      </div>
+      <div class="mt-7 grid gap-5 lg:grid-cols-2">
+       <article data-template-id="to-decimal-panel" class="canva-panel rounded-2xl p-5 sm:p-6">
+        <div class="flex items-center gap-3">
+         <span class="grid h-10 w-10 place-items-center rounded-full bg-[#0f6cbf] text-white"> <i data-lucide="arrow-right" aria-hidden="true"></i> </span>
+         <h3 data-template-id="to-decimal-title" class="canva-text display-font"></h3>
+        </div>
+        <p data-template-id="to-decimal-description" class="canva-text mt-4 leading-relaxed"></p>
+        <div class="mt-5 space-y-3">
+         <div data-template-id="to-decimal-example-one" class="canva-card equation-row rounded-xl border p-4 font-semibold"></div>
+         <div data-template-id="to-decimal-example-two" class="canva-card equation-row rounded-xl border p-4 font-semibold"></div>
+        </div>
+       </article>
+       <article data-template-id="to-fraction-panel" class="canva-panel rounded-2xl p-5 sm:p-6">
+        <div class="flex items-center gap-3">
+         <span class="grid h-10 w-10 place-items-center rounded-full bg-[#16856b] text-white"> <i data-lucide="arrow-left" aria-hidden="true"></i> </span>
+         <h3 data-template-id="to-fraction-title" class="canva-text display-font"></h3>
+        </div>
+        <p data-template-id="to-fraction-description" class="canva-text mt-4 leading-relaxed"></p>
+        <div class="mt-5 space-y-3">
+         <div data-template-id="to-fraction-example-one" class="canva-card equation-row rounded-xl border p-4 font-semibold"></div>
+         <div data-template-id="to-fraction-example-two" class="canva-card equation-row rounded-xl border p-4 font-semibold"></div>
+        </div>
+       </article>
+      </div>
+     </section>
+     <aside data-template-id="summary-panel" class="canva-panel paper-card rounded-3xl border-l-8 p-5 sm:p-7" aria-labelledby="summary-heading">
+      <div class="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+       <div>
+        <div class="flex items-center gap-3">
+         <span class="grid h-10 w-10 place-items-center rounded-full bg-white text-[#0f6cbf] shadow-sm"> <i data-lucide="lightbulb" aria-hidden="true"></i> </span>
+         <h2 id="summary-heading" data-template-id="summary-title" class="canva-text display-font"></h2>
+        </div>
+        <p data-template-id="summary-description" class="canva-text mt-3"></p>
+       </div>
+       <div class="grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <div data-template-id="summary-quarter" class="canva-card rounded-xl px-5 py-4 text-center font-bold"></div>
+        <div data-template-id="summary-half" class="canva-card rounded-xl px-5 py-4 text-center font-bold"></div>
+        <div data-template-id="summary-three-quarters" class="canva-card rounded-xl px-5 py-4 text-center font-bold"></div>
+       </div>
+      </div>
+     </aside>
+    </div>
+   </main>
+   <footer data-template-id="footer-section" class="canva-footer mt-4 w-full px-5 py-7 text-center">
+    <p data-template-id="footer-text" class="canva-text"></p>
+   </footer>
+  </div>
+  <script>
+    document.querySelectorAll("[data-target]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const target = document.getElementById(button.dataset.target);
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      lucide.createIcons();
+    });
+  </script>
+ </body>
+</html>
